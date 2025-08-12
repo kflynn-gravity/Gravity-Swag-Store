@@ -151,7 +151,7 @@
 
                     <div class="mt-6">
                         <p class="text-sm text-gray-500">
-                            Your order will be processed as a payroll deduction. You will receive a link via Slack to securely pay via ACH.
+                            You will receive a link via Slack to securely pay via ACH.
                         </p>
                     </div>
 
@@ -327,10 +327,7 @@
                      const itemId = buttonElement.dataset.id;
                      const quantitySpan = document.getElementById(`quantity-${itemId}`);
                      
-                     // We can't update quantity on the card for sized items, as each size has its own quantity.
-                     // A more complex UI would be needed for that. For now, we update the main cart.
-                     // The total quantity for a non-sized item is still tracked and updated.
-                     if (quantitySpan && buttonElement.dataset.hasSizes !== 'true') {
+                     if (quantitySpan) {
                         let totalQuantity = 0;
                         for (const key in cart) {
                             if (key.startsWith(itemId + '_')) {
@@ -355,7 +352,7 @@
                     showMessage('Please fill in your name, email, and shipping address.', 'bg-red-100 text-red-800');
                     return;
                 }
-
+                
                 // Format the selected items to include sizes
                 const selectedItems = Object.entries(cart)
                     .filter(([itemKey, quantity]) => quantity > 0)

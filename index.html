@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Company Swag Store</title>
+    <title>Gravity Swag Store</title>
     <!-- Tailwind CSS CDN for easy styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Use Inter font for a clean, modern look -->
@@ -50,13 +50,13 @@
         <!-- Header section, inspired by Gravity Payments' clean header -->
         <header class="bg-white shadow-sm sticky top-0 z-50">
             <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-                <div class="text-2xl font-bold text-gray-900">
-                    <a href="#">Swag Store</a>
+                <div class="text-2xl font-bold text-gray-900 flex items-center space-x-2">
+                    <!-- Gravity Payments-style logo SVG -->
+                    <svg class="h-8 w-8 text-indigo-600" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm1 16.033V13.5h2.5v-3H13V7.967c0-1.637.76-2.033 2.062-2.033h.438V3.5h-2.25c-2.422 0-3.25.992-3.25 3.038V10.5H8.5v3h1.5v4.533H13z"/>
+                    </svg>
+                    <a href="#">Gravity Swag Store</a>
                 </div>
-                <nav>
-                    <a href="#" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md transition-colors duration-200">Home</a>
-                    <a href="#" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md transition-colors duration-200">About</a>
-                </nav>
             </div>
         </header>
 
@@ -65,7 +65,7 @@
             <div class="flex-1">
                 <!-- Title and user name input -->
                 <div class="mb-8">
-                    <h1 class="text-4xl font-bold mb-2">Welcome to the Swag Store!</h1>
+                    <h1 class="text-4xl font-bold mb-2">Welcome to the Gravity Swag Store!</h1>
                     <p class="text-lg text-gray-600">Select your favorite gear below. Your estimated total will be tracked in the cart.</p>
                 </div>
                 
@@ -78,7 +78,13 @@
             <!-- Floating Cart & Checkout Section -->
             <aside class="w-full lg:w-1/3">
                 <form id="orderForm" class="bg-white p-6 rounded-lg shadow-lg cart-container">
-                    <h2 class="text-2xl font-bold mb-4">Your Cart</h2>
+                    <h2 class="text-2xl font-bold mb-4 flex items-center space-x-2">
+                        <!-- Simplified logo in cart -->
+                        <svg class="h-6 w-6 text-indigo-600" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm1 16.033V13.5h2.5v-3H13V7.967c0-1.637.76-2.033 2.062-2.033h.438V3.5h-2.25c-2.422 0-3.25.992-3.25 3.038V10.5H8.5v3h1.5v4.533H13z"/>
+                        </svg>
+                        <span>Your Cart</span>
+                    </h2>
                     <div id="cartItems" class="space-y-4">
                         <!-- Cart items will be dynamically loaded here -->
                     </div>

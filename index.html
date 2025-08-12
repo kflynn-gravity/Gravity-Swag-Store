@@ -4,45 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gravity Swag Store</title>
-    <!-- Use Inter font for a clean, modern look -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
     <!-- Tailwind CSS CDN for easy styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* Proxima Nova font import */
+        @font-face {
+            font-family: 'Proxima Nova';
+            src: url('fonts/ProximaNova-Regular.woff2') format('woff2'),
+                 url('fonts/ProximaNova-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Proxima Nova';
+            src: url('fonts/ProximaNova-Bold.woff2') format('woff2'),
+                 url('fonts/ProximaNova-Bold.woff') format('woff');
+            font-weight: bold;
+            font-style: normal;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
-            color: #1f2937; /* Dark gray text */
-            position: relative;
-            overflow-x: hidden;
-            
-        }
-
-        /* Fluid background to match Gravity Payments website */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            font-family: 'Proxima Nova', sans-serif;
             background-color: #f7fafc; /* Light gray background */
-            background-image: 
-                radial-gradient(ellipse at 10% 20%, rgba(200, 209, 236, 0.4) 0%, rgba(230, 235, 247, 0.2) 50%, rgba(247, 248, 252, 0) 100%),
-                radial-gradient(ellipse at 90% 80%, rgba(230, 235, 247, 0.5) 0%, rgba(210, 220, 240, 0.3) 50%, rgba(247, 248, 252, 0) 100%),
-                radial-gradient(ellipse at 50% 50%, rgba(210, 220, 240, 0.3) 0%, rgba(230, 235, 247, 0.2) 50%, rgba(247, 248, 252, 0) 100%);
-            background-blend-mode: multiply;
-            z-index: -1;
         }
-
         .container {
             max-width: 1200px;
         }
-
-        .swag-list-container {
-            max-height: calc(100vh - 12rem);
-            overflow-y: auto;
+        /* Custom scrollbar for the swag list on larger screens */
+        @media (min-width: 1024px) {
+            .swag-list-container {
+                max-height: calc(100vh - 12rem);
+                overflow-y: auto;
+            }
         }
-
+        /* Style for the floating cart */
         .cart-container {
             position: sticky;
             top: 2rem;
@@ -68,6 +63,19 @@
 </head>
 <body class="text-gray-800">
 
+    <!-- Password Protection Page -->
+    <div id="password-screen" class="fixed inset-0 bg-gray-100 flex items-center justify-center z-50">
+        <div class="bg-white p-8 rounded-lg shadow-xl max-w-sm w-full text-center">
+            <h2 class="text-3xl font-bold mb-4">Access Required</h2>
+            <p class="text-gray-600 mb-6">Please enter the password to access the Swag Store.</p>
+            <input type="password" id="password-input" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter password">
+            <button id="password-submit-btn" class="mt-4 w-full gravity-blue text-white font-semibold py-2 rounded-md transition-colors hover:gravity-blue-hover">
+                Enter
+            </button>
+            <div id="password-error" class="mt-2 text-red-500 text-sm hidden">Incorrect password. Please try again.</div>
+        </div>
+    </div>
+
     <!-- Confirmation Page Overlay (initially hidden) -->
     <div id="confirmationPage" class="fixed inset-0 bg-gray-50 flex items-center justify-center p-6 z-50 hidden">
         <div class="bg-white p-8 rounded-lg shadow-2xl max-w-xl text-center transition-transform duration-500 transform scale-95 opacity-0" id="confirmationCard">
@@ -81,7 +89,7 @@
     </div>
     
     <!-- Main Content -->
-    <div id="mainContent">
+    <div id="mainContent" class="hidden">
         <!-- Header section, inspired by Gravity Payments' clean header -->
         <header class="bg-white shadow-sm sticky top-0 z-50">
             <div class="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -164,7 +172,7 @@
             // This is the inventory data. You can easily adjust it by editing this array.
             const inventory = [
                 { id: '1', name: 'Water Bottle', price: 15.00, imageUrl: 'https://placehold.co/400x300/a3b1c6/ffffff?text=Water+Bottle', description: 'A sleek, branded water bottle.' },
-                { id: '2', name: 'Hoodie', price: 45.00, imageUrl: 'https://placehold.co/400x300/e0eaf6/ffffff?text=Hoodie', description: 'Cozy and comfortable company hoodie.' },
+                { id: '2', name: 'Hoodie', price: 45.00, imageUrl: 'https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/a78e1178aaba17bdac6d69df58eddd79b6d3e4c7/images/Gravity%20hoodie%20light%20.jpg?raw=true', description: 'Cozy and comfortable company hoodie.' },
                 { id: '3', name: 'T-Shirt', price: 20.00, imageUrl: 'https://placehold.co/400x300/808b9e/ffffff?text=T-Shirt', description: 'Soft cotton T-shirt with logo.' },
                 { id: '4', name: 'Notebook', price: 10.00, imageUrl: 'https://placehold.co/400x300/c7d3e6/ffffff?text=Notebook', description: 'Journal for your thoughts and ideas.' },
                 { id: '5', name: 'Coffee Mug', price: 12.50, imageUrl: 'https://placehold.co/400x300/6b7280/ffffff?text=Mug', description: 'Start your day with a branded mug.' },
@@ -186,6 +194,30 @@
             // Your Google Form URL. This will now be used instead of the serverless function.
             const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSc5jB0nhVWjpjHoViUiEJqX7BBheodhDNge6Pzb12yhTrnG3Q/formResponse';
             
+            // Password for the site (for front-end protection only)
+            const ACCESS_PASSWORD = 'GravitySwag123';
+            const passwordScreen = document.getElementById('password-screen');
+            const passwordInput = document.getElementById('password-input');
+            const passwordSubmitBtn = document.getElementById('password-submit-btn');
+            const passwordError = document.getElementById('password-error');
+
+            passwordSubmitBtn.addEventListener('click', () => {
+                if (passwordInput.value === ACCESS_PASSWORD) {
+                    passwordScreen.classList.add('hidden');
+                    mainContent.classList.remove('hidden');
+                } else {
+                    passwordError.classList.remove('hidden');
+                    passwordInput.value = '';
+                }
+            });
+
+            // Allow hitting Enter key to submit password
+            passwordInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    passwordSubmitBtn.click();
+                }
+            });
+
             function renderSwagList() {
                 swagList.innerHTML = '';
                 inventory.forEach(item => {
@@ -197,7 +229,7 @@
                             <h3 class="text-xl font-bold text-gray-900">${item.name}</h3>
                             <p class="text-sm text-gray-500 mt-1">${item.description}</p>
                             <div class="mt-4 flex justify-between items-center">
-                                <span class="text-2xl font-bold gravity-green-text">$${item.price.toFixed(2)}</span>
+                                <span class="text-xl font-bold gravity-green-text">$${item.price.toFixed(2)}</span>
                                 <div class="flex items-center space-x-2">
                                     <button data-id="${item.id}" class="remove-from-cart-btn bg-gray-200 text-gray-600 p-1 rounded-md transition-colors duration-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -205,7 +237,7 @@
                                         </svg>
                                     </button>
                                     <span id="quantity-${item.id}" class="text-lg font-semibold">0</span>
-                                    <button data-id="${item.id}" class="add-to-cart-btn gravity-blue text-white p-1 rounded-md transition-colors duration-200 hover:bg-indigo-700">
+                                    <button data-id="${item.id}" class="add-to-cart-btn gravity-blue text-white p-1 rounded-md transition-colors duration-200 hover:gravity-blue-hover">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                                         </svg>

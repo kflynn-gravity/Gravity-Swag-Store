@@ -146,8 +146,8 @@
 
             let cart = {}; // Stores { itemId: quantity }
 
-            // URL for your serverless function that handles the Ramp API call.
-            // You will replace this with your deployed function's URL.
+            // NOTE: This URL is for a serverless function and will only work after you've deployed it.
+            // For now, we are bypassing the fetch call to test the confirmation page.
             const serverlessFunctionUrl = 'https://your-serverless-function-url.vercel.app/api/ramp';
             
             function renderSwagList() {
@@ -237,7 +237,7 @@
                 updateCart();
             });
 
-            // Handle form submission to the serverless function
+            // Handle form submission
             orderForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 const userName = document.getElementById('userName').value.trim();
@@ -267,43 +267,46 @@
                     return;
                 }
                 
-                // Prepare the data to be sent to the serverless function.
-                const orderData = {
-                    userName,
-                    userEmail, // Now sending the user's email address
-                    shippingAddress,
-                    selectedItems,
-                    totalCost: totalPriceElement.textContent,
-                };
+                // *** NOTE: For testing purposes, we are skipping the fetch call. ***
+                // *** This code will be uncommented once the serverless function is deployed. ***
+
+                // const orderData = {
+                //     userName,
+                //     userEmail,
+                //     shippingAddress,
+                //     selectedItems,
+                //     totalCost: totalPriceElement.textContent,
+                // };
                 
-                try {
-                    const response = await fetch(serverlessFunctionUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(orderData),
-                    });
+                // try {
+                //     const response = await fetch(serverlessFunctionUrl, {
+                //         method: 'POST',
+                //         headers: {
+                //             'Content-Type': 'application/json',
+                //         },
+                //         body: JSON.stringify(orderData),
+                //     });
 
-                    const result = await response.json();
+                //     const result = await response.json();
 
-                    if (response.ok) {
-                        // Display the confirmation page
-                        showConfirmationPage();
-                    } else {
-                        throw new Error(result.error || 'Unknown error');
-                    }
+                //     if (response.ok) {
+                //         showConfirmationPage();
+                //     } else {
+                //         throw new Error(result.error || 'Unknown error');
+                //     }
                     
-                    // Clear the form and cart after submission.
-                    cart = {};
-                    orderForm.reset();
-                    renderSwagList();
-                    updateCart();
+                //     cart = {};
+                //     orderForm.reset();
+                //     renderSwagList();
+                //     updateCart();
 
-                } catch (error) {
-                    console.error('Submission error:', error);
-                    showMessage(`There was an error submitting your order: ${error.message}`, 'bg-red-100 text-red-800');
-                }
+                // } catch (error) {
+                //     console.error('Submission error:', error);
+                //     showMessage(`There was an error submitting your order: ${error.message}`, 'bg-red-100 text-red-800');
+                // }
+
+                // This line will now run immediately after validation passes.
+                showConfirmationPage();
             });
 
             function showMessage(message, className) {

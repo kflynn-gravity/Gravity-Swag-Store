@@ -78,7 +78,7 @@
             <!-- Main content area -->
             <div class="flex-1">
                 <!-- Title and user name input -->
-                <div class="mb-8">
+                <div class="mb-8 text-center md:text-left">
                     <h1 class="text-4xl font-bold mb-2">Welcome to the Gravity Swag Store!</h1>
                     <p class="text-lg text-gray-600">Select your favorite gear below. Your estimated total will be tracked in the cart.</p>
                 </div>
@@ -178,7 +178,7 @@
                             <h3 class="text-xl font-bold text-gray-900">${item.name}</h3>
                             <p class="text-sm text-gray-500 mt-1">${item.description}</p>
                             <div class="mt-4 flex justify-between items-center">
-                                <span class="text-2xl font-bold text-indigo-600">$${item.price.toFixed(2)}</span>
+                                <span class="text-2xl font-bold gravity-green-text">$${item.price.toFixed(2)}</span>
                                 <div class="flex items-center space-x-2">
                                     <button data-id="${item.id}" class="remove-from-cart-btn bg-gray-200 text-gray-600 p-1 rounded-md transition-colors duration-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -186,7 +186,7 @@
                                         </svg>
                                     </button>
                                     <span id="quantity-${item.id}" class="text-lg font-semibold">0</span>
-                                    <button data-id="${item.id}" class="add-to-cart-btn bg-indigo-600 text-white p-1 rounded-md transition-colors duration-200 hover:bg-indigo-700">
+                                    <button data-id="${item.id}" class="add-to-cart-btn gravity-blue text-white p-1 rounded-md transition-colors duration-200 hover:bg-indigo-700">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                                         </svg>
@@ -298,15 +298,12 @@
                 try {
                     const response = await fetch(googleFormUrl, {
                         method: 'POST',
-                        mode: 'no-cors', // Important for cross-origin requests
+                        mode: 'no-cors',
                         body: formData
                     });
                     
-                    // We can't check for a 'success' response with no-cors, so we assume it worked.
-                    // The email confirmation is sent by Google Forms itself.
                     showConfirmationPage();
 
-                    // Clear the form and cart after submission
                     cart = {};
                     orderForm.reset();
                     renderSwagList();
@@ -342,7 +339,6 @@
                     countdownElement.textContent = countdown;
                     if (countdown === 0) {
                         clearInterval(interval);
-                        // Redirect or just reload the page to go back to the store
                         location.reload(); 
                     }
                 }, 1000);

@@ -150,12 +150,9 @@
                     </div>
 
                     <div class="mt-6">
-                        <div class="flex items-center">
-                            <input id="payrollDeduction" type="checkbox" class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
-                            <label for="payrollDeduction" class="ml-2 block text-sm text-gray-900 cursor-pointer">
-                                I acknowledge my payment will be a reduction in my next payroll.
-                            </label>
-                        </div>
+                        <p class="text-sm text-gray-500">
+                            Your order will be processed as a payroll deduction. You will receive a link via Slack to securely pay via ACH.
+                        </p>
                     </div>
 
                     <button type="submit" class="mt-6 w-full text-white font-semibold py-3 rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 gravity-blue gravity-blue-hover">
@@ -183,7 +180,6 @@
             const cartItemsContainer = document.getElementById('cartItems');
             const totalPriceElement = document.getElementById('totalPrice');
             const messageBox = document.getElementById('messageBox');
-            const payrollDeductionCheckbox = document.getElementById('payrollDeduction');
             const orderForm = document.getElementById('orderForm');
             const mainContent = document.getElementById('mainContent');
             const confirmationPage = document.getElementById('confirmationPage');
@@ -354,15 +350,9 @@
                 const userName = document.getElementById('userName').value.trim();
                 const userEmail = document.getElementById('userEmail').value.trim();
                 const shippingAddress = document.getElementById('shippingAddress').value.trim();
-                const deductionAcknowledged = payrollDeductionCheckbox.checked;
-
+                
                 if (!userName || !shippingAddress || !userEmail) {
                     showMessage('Please fill in your name, email, and shipping address.', 'bg-red-100 text-red-800');
-                    return;
-                }
-
-                if (!deductionAcknowledged) {
-                    showMessage('You must acknowledge the payroll deduction.', 'bg-red-100 text-red-800');
                     return;
                 }
 

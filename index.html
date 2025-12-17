@@ -41,7 +41,7 @@
             position: sticky;
             top: 2rem;
             max-height: calc(100vh - 4rem);
-            overflow-y: auto; /* Added scroll in case cart gets long */
+            overflow-y: auto; 
         }
 
         /* Custom colors to match Gravity Payments branding */
@@ -179,8 +179,8 @@
 
             // --- COUPON CONFIGURATION ---
             const coupons = {
-                'GRAVITY10': { type: 'percent', value: 0.10 }, // 10% off
-                'WELCOME5':  { type: 'fixed', value: 5.00 }    // $5.00 off
+                // Now configured to $10.00 OFF
+                'GRAVITY10': { type: 'fixed', value: 10.00 }
             };
             let appliedCoupon = null;
             // ----------------------------

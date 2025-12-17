@@ -168,107 +168,68 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- INVENTORY CONFIGURATION ---
-            // Note: Please ensure you create an 'images' folder and save photos with these names
-            // or replace the paths with your Google Drive links.
-            // Also, double check the prices as they were estimated.
+            // --- INVENTORY UPDATE BASED ON SCREENSHOT ---
+            // Note: I estimated prices as placeholders. Please update them to match your accounting.
             const inventory = [
                 { 
                     id: '1', 
                     name: 'Gravity T-Shirt', 
                     price: 20.00, 
                     imageUrl: 'images/gravity-tshirt.jpg', 
-                    description: 'Classic Gravity T-Shirt (Boise Meeting edition).', 
+                    description: 'Standard Gravity T-Shirt.', 
                     sizes: ['S', 'M', 'L', 'XL', '3XL'] 
                 },
                 { 
                     id: '2', 
-                    name: 'Men\'s Sweatshirt', 
-                    price: 45.00, 
-                    imageUrl: 'images/mens-sweatshirt.jpg', 
-                    description: 'Comfortable Gravity sweatshirt.', 
-                    sizes: ['S', 'M', 'L', 'XL', '3XL', '4XL'] 
+                    name: 'Gravity T-Shirt (New Hire Swag)', 
+                    price: 20.00, 
+                    imageUrl: 'images/gravity-tshirt-new.jpg', 
+                    description: 'New Hire Swag Edition.', 
+                    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL', '4XL'] 
                 },
                 { 
                     id: '3', 
-                    name: 'Gravity Winter Coat', 
-                    price: 85.00, 
-                    imageUrl: 'images/winter-coat.jpg', 
-                    description: 'Heavy duty winter coat.', 
-                    sizes: ['S', 'M', 'L', 'XL', '2XL'] 
+                    name: 'Gravity Sweat Shirts - Men', 
+                    price: 45.00, 
+                    imageUrl: 'images/mens-sweatshirt.jpg', 
+                    description: 'Men\'s cut sweatshirt.', 
+                    sizes: ['S', 'M', 'L', 'XL'] 
                 },
                 { 
                     id: '4', 
-                    name: 'Gravity Polos', 
-                    price: 30.00, 
-                    imageUrl: 'images/gravity-polo.jpg', 
-                    description: 'Branded polo shirt.', 
-                    sizes: ['XS', 'S', 'M', 'L', 'XL', '3XL'] 
+                    name: 'Gravity Sweat Shirts - Women', 
+                    price: 45.00, 
+                    imageUrl: 'images/womens-sweatshirt.jpg', 
+                    description: 'Women\'s cut sweatshirt.', 
+                    sizes: ['S', 'M', 'L', 'XL', '2XL'] 
                 },
                 { 
                     id: '5', 
-                    name: '#Worthit T-Shirt', 
-                    price: 20.00, 
-                    imageUrl: 'images/worthit-tshirt.jpg', 
-                    description: '#Worthit campaign tee.', 
-                    sizes: ['S', 'M', 'L'] 
+                    name: 'Gravity Branded Hi-liter', 
+                    price: 2.00, 
+                    imageUrl: 'images/hiliter.jpg', 
+                    description: 'Office essential highlighter.' 
                 },
                 { 
                     id: '6', 
-                    name: 'Lightweight Hoodie', 
-                    price: 40.00, 
-                    imageUrl: 'images/lightweight-hoodie.jpg', 
-                    description: 'Lighter weight hoodie option.', 
-                    sizes: ['L', 'XL', '4XL'] 
+                    name: 'Gravity Branded full size notebook', 
+                    price: 12.00, 
+                    imageUrl: 'images/full-notebook.jpg', 
+                    description: 'Large branded notebook for your desk.' 
                 },
                 { 
                     id: '7', 
-                    name: 'Gravity Blue Notebook', 
-                    price: 12.00, 
-                    imageUrl: 'images/blue-notebook.jpg', 
-                    description: 'Standard Gravity branded blue notebook.' 
+                    name: 'Gravity Pens', 
+                    price: 1.50, 
+                    imageUrl: 'images/pens.jpg', 
+                    description: 'Classic branded ballpoint pen.' 
                 },
                 { 
                     id: '8', 
-                    name: 'Brown Journal', 
-                    price: 15.00, 
-                    imageUrl: 'images/brown-journal.jpg', 
-                    description: 'Maximum Effort leather-style brown journal.' 
-                },
-                { 
-                    id: '9', 
-                    name: 'Stainless Steel Water Bottle', 
+                    name: 'Gravity stainless steel 32 oz waterbottle (new hire)', 
                     price: 25.00, 
-                    imageUrl: 'images/steel-bottle.jpg', 
-                    description: '32oz Stainless steel water bottle.' 
-                },
-                { 
-                    id: '10', 
-                    name: 'Gravity Sunglasses', 
-                    price: 10.00, 
-                    imageUrl: 'images/sunglasses.jpg', 
-                    description: 'Cool branded eyewear.' 
-                },
-                { 
-                    id: '11', 
-                    name: 'Fanny Pack', 
-                    price: 18.00, 
-                    imageUrl: 'images/fanny-pack.jpg', 
-                    description: 'Gravity branded fanny pack (Back to the 90s!).' 
-                },
-                { 
-                    id: '12', 
-                    name: 'Navy Blue Tumbler', 
-                    price: 22.00, 
-                    imageUrl: 'images/navy-tumbler.jpg', 
-                    description: 'Stainless steel navy blue tumbler.' 
-                },
-                {
-                    id: '13',
-                    name: 'Gravity Sticky Notes',
-                    price: 5.00,
-                    imageUrl: 'images/sticky-notes.jpg',
-                    description: 'Branded sticky notes.'
+                    imageUrl: 'images/steel-bottle-new.jpg', 
+                    description: 'Large 32oz water bottle.' 
                 }
             ];
 
@@ -603,4 +564,5 @@
         });
     </script>
 </body>
+</html>
 </html>

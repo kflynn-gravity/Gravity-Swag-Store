@@ -169,12 +169,99 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const inventory = [
-                { id: '1', name: 'Water Bottle', price: 15.00, imageUrl: 'https://placehold.co/400x300/a3b1c6/ffffff?text=Water+Bottle', description: 'A sleek, branded water bottle.' },
-                { id: '2', name: 'Hoodie', price: 45.00, imageUrl: 'https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/a78e1178aaba17bdac6d69df58eddd79b6d3e4c7/images/Gravity%20hoodie%20light%20.jpg?raw=true', description: 'Cozy and comfortable company hoodie.', sizes: ['S', 'M', 'L', 'XL', '2XL'] },
-                { id: '3', name: 'T-Shirt', price: 20.00, imageUrl: 'https://placehold.co/400x300/808b9e/ffffff?text=T-Shirt', description: 'Soft cotton T-shirt with logo.', sizes: ['S', 'M', 'L', 'XL', '2XL'] },
-                { id: '4', name: 'Notebook', price: 10.00, imageUrl: 'https://placehold.co/400x300/c7d3e6/ffffff?text=Notebook', description: 'Journal for your thoughts and ideas.' },
-                { id: '5', name: 'Coffee Mug', price: 12.50, imageUrl: 'https://placehold.co/400x300/6b7280/ffffff?text=Mug', description: 'Start your day with a branded mug.' },
-                { id: '6', name: 'Laptop Sticker', price: 5.00, imageUrl: 'https://placehold.co/400x300/4a5568/ffffff?text=Sticker', description: 'Show off your company pride.' }
+               // UPDATE THIS SECTION IN YOUR CODE
+            const inventory = [
+                { 
+                    id: '1', 
+                    name: 'Gravity T-Shirt', 
+                    price: 20.00, 
+                    imageUrl: 'images/gravity-tshirt.jpg', 
+                    description: 'Classic Gravity T-Shirt (Boise Meeting edition).', 
+                    sizes: ['S', 'M', 'L', 'XL', '3XL'] 
+                },
+                { 
+                    id: '2', 
+                    name: 'Men\'s Sweatshirt', 
+                    price: 45.00, 
+                    imageUrl: 'images/mens-sweatshirt.jpg', 
+                    description: 'Comfortable Gravity sweatshirt.', 
+                    sizes: ['S', 'M', 'L', 'XL'] 
+                },
+                { 
+                    id: '3', 
+                    name: 'Gravity Winter Coat', 
+                    price: 85.00, 
+                    imageUrl: 'images/winter-coat.jpg', 
+                    description: 'Heavy duty winter coat with initials embroidery option.', 
+                    sizes: ['S', 'M', 'L', 'XL', '2XL'] 
+                },
+                { 
+                    id: '4', 
+                    name: 'Gravity Polos', 
+                    price: 30.00, 
+                    imageUrl: 'images/gravity-polo.jpg', 
+                    description: 'Branded polo shirt.', 
+                    sizes: ['XS', 'S', 'M', 'L', 'XL', '3XL'] 
+                },
+                { 
+                    id: '5', 
+                    name: '#Worthit T-Shirt', 
+                    price: 20.00, 
+                    imageUrl: 'images/worthit-tshirt.jpg', 
+                    description: '#Worthit campaign tee.', 
+                    sizes: ['S', 'M', 'L'] 
+                },
+                { 
+                    id: '6', 
+                    name: 'Gravity Lightweight Hoodie', 
+                    price: 40.00, 
+                    imageUrl: 'images/lightweight-hoodie.jpg', 
+                    description: 'Lighter weight hoodie option.', 
+                    sizes: ['L', 'XL', '4XL'] 
+                },
+                { 
+                    id: '7', 
+                    name: 'Gravity Blue Notebook', 
+                    price: 12.00, 
+                    imageUrl: 'images/blue-notebook.jpg', 
+                    description: 'Standard Gravity branded blue notebook.' 
+                },
+                { 
+                    id: '8', 
+                    name: 'Brown Journal (Max Effort)', 
+                    price: 15.00, 
+                    imageUrl: 'images/brown-journal.jpg', 
+                    description: 'Maximum Effort leather-style brown journal.' 
+                },
+                { 
+                    id: '9', 
+                    name: 'Stainless Steel Water Bottle', 
+                    price: 25.00, 
+                    imageUrl: 'images/steel-bottle.jpg', 
+                    description: '32oz Stainless steel water bottle.' 
+                },
+                { 
+                    id: '10', 
+                    name: 'Gravity Sunglasses', 
+                    price: 10.00, 
+                    imageUrl: 'images/sunglasses.jpg', 
+                    description: 'Cool branded eyewear.' 
+                },
+                { 
+                    id: '11', 
+                    name: 'Fanny Pack', 
+                    price: 18.00, 
+                    imageUrl: 'images/fanny-pack.jpg', 
+                    description: 'Gravity branded fanny pack.' 
+                },
+                { 
+                    id: '12', 
+                    name: 'Navy Blue Tumbler', 
+                    price: 22.00, 
+                    imageUrl: 'images/navy-tumbler.jpg', 
+                    description: 'Stainless steel navy blue tumbler.' 
+                }
+            ];
             ];
 
             // --- COUPON CONFIGURATION ---

@@ -168,8 +168,10 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const inventory = [
-               // UPDATE THIS SECTION IN YOUR CODE
+            // --- INVENTORY CONFIGURATION ---
+            // Note: Please ensure you create an 'images' folder and save photos with these names
+            // or replace the paths with your Google Drive links.
+            // Also, double check the prices as they were estimated.
             const inventory = [
                 { 
                     id: '1', 
@@ -185,14 +187,14 @@
                     price: 45.00, 
                     imageUrl: 'images/mens-sweatshirt.jpg', 
                     description: 'Comfortable Gravity sweatshirt.', 
-                    sizes: ['S', 'M', 'L', 'XL'] 
+                    sizes: ['S', 'M', 'L', 'XL', '3XL', '4XL'] 
                 },
                 { 
                     id: '3', 
                     name: 'Gravity Winter Coat', 
                     price: 85.00, 
                     imageUrl: 'images/winter-coat.jpg', 
-                    description: 'Heavy duty winter coat with initials embroidery option.', 
+                    description: 'Heavy duty winter coat.', 
                     sizes: ['S', 'M', 'L', 'XL', '2XL'] 
                 },
                 { 
@@ -213,7 +215,7 @@
                 },
                 { 
                     id: '6', 
-                    name: 'Gravity Lightweight Hoodie', 
+                    name: 'Lightweight Hoodie', 
                     price: 40.00, 
                     imageUrl: 'images/lightweight-hoodie.jpg', 
                     description: 'Lighter weight hoodie option.', 
@@ -228,7 +230,7 @@
                 },
                 { 
                     id: '8', 
-                    name: 'Brown Journal (Max Effort)', 
+                    name: 'Brown Journal', 
                     price: 15.00, 
                     imageUrl: 'images/brown-journal.jpg', 
                     description: 'Maximum Effort leather-style brown journal.' 
@@ -252,7 +254,7 @@
                     name: 'Fanny Pack', 
                     price: 18.00, 
                     imageUrl: 'images/fanny-pack.jpg', 
-                    description: 'Gravity branded fanny pack.' 
+                    description: 'Gravity branded fanny pack (Back to the 90s!).' 
                 },
                 { 
                     id: '12', 
@@ -260,14 +262,19 @@
                     price: 22.00, 
                     imageUrl: 'images/navy-tumbler.jpg', 
                     description: 'Stainless steel navy blue tumbler.' 
+                },
+                {
+                    id: '13',
+                    name: 'Gravity Sticky Notes',
+                    price: 5.00,
+                    imageUrl: 'images/sticky-notes.jpg',
+                    description: 'Branded sticky notes.'
                 }
-            ];
             ];
 
             // --- COUPON CONFIGURATION ---
             const coupons = {
-                // Now configured to $10.00 OFF
-                'GRAVITY10': { type: 'fixed', value: 10.00 }
+                'GRAVITY10': { type: 'fixed', value: 10.00 } // $10.00 OFF
             };
             let appliedCoupon = null;
             // ----------------------------

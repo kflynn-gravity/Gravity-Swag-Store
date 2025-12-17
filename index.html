@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gravity Swag Store</title>
-    <!-- Tailwind CSS CDN for easy styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* Proxima Nova font import */
@@ -42,6 +41,7 @@
             position: sticky;
             top: 2rem;
             max-height: calc(100vh - 4rem);
+            overflow-y: auto; /* Added scroll in case cart gets long */
         }
 
         /* Custom colors to match Gravity Payments branding */
@@ -63,7 +63,6 @@
 </head>
 <body class="text-gray-800">
 
-    <!-- Password Protection Page -->
     <div id="password-screen" class="fixed inset-0 bg-gray-100 flex items-center justify-center z-50">
         <div class="bg-white p-8 rounded-lg shadow-xl max-w-sm w-full text-center">
             <h2 class="text-3xl font-bold mb-4">Access Required</h2>
@@ -76,7 +75,6 @@
         </div>
     </div>
 
-    <!-- Confirmation Page Overlay (initially hidden) -->
     <div id="confirmationPage" class="fixed inset-0 bg-gray-50 flex items-center justify-center p-6 z-50 hidden">
         <div class="bg-white p-8 rounded-lg shadow-2xl max-w-xl text-center transition-transform duration-500 transform scale-95 opacity-0" id="confirmationCard">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-green-500 mx-auto mb-4" viewBox="0 0 20 20" fill="currentColor">
@@ -88,13 +86,10 @@
         </div>
     </div>
     
-    <!-- Main Content -->
     <div id="mainContent" class="hidden">
-        <!-- Header section, inspired by Gravity Payments' clean header -->
         <header class="bg-white shadow-sm sticky top-0 z-50">
             <div class="container mx-auto px-6 py-4 flex justify-between items-center">
                 <div class="text-2xl font-bold text-gray-900 flex items-center space-x-2">
-                    <!-- Gravity Payments-style logo PNG -->
                     <img src="https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/download.png?raw=true" alt="Gravity Payments Logo" class="h-8 w-8">
                     <a href="#">Gravity Swag Store</a>
                 </div>
@@ -102,36 +97,43 @@
         </header>
 
         <main class="container mx-auto px-6 py-12 flex flex-col lg:flex-row gap-8">
-            <!-- Main content area -->
             <div class="flex-1">
-                <!-- Title and user name input -->
                 <div class="mb-8 text-center md:text-left">
                     <h1 class="text-4xl font-bold mb-2">Welcome to the Gravity Swag Store!</h1>
                     <p class="text-lg text-gray-600">Select your favorite gear below. Your estimated total will be tracked in the cart.</p>
                 </div>
                 
-                <!-- Swag Products Section -->
                 <div id="swagList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Products will be dynamically loaded here by JavaScript -->
-                </div>
+                    </div>
             </div>
 
-            <!-- Floating Cart & Checkout Section -->
             <aside class="w-full lg:w-1/3">
                 <form id="orderForm" class="bg-white p-6 rounded-lg shadow-lg cart-container">
                     <h2 class="text-2xl font-bold mb-4 flex items-center space-x-2">
-                        <!-- Simplified logo in cart -->
                         <img src="https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/download.png?raw=true" alt="Simplified Logo" class="h-6 w-6">
                         <span>Your Cart</span>
                     </h2>
+                    
                     <div id="cartItems" class="space-y-4">
-                        <!-- Cart items will be dynamically loaded here -->
+                        </div>
+
+                    <div class="mt-4 border-t border-gray-200 pt-4">
+                        <label for="couponCode" class="block text-sm font-medium text-gray-700">Coupon Code</label>
+                        <div class="flex space-x-2 mt-1">
+                            <input type="text" id="couponInput" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2" placeholder="Enter code">
+                            <button type="button" id="applyCouponBtn" class="bg-gray-200 text-gray-800 font-semibold px-4 py-2 rounded-md transition-colors hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                Apply
+                            </button>
+                        </div>
+                        <p id="couponMessage" class="text-sm mt-2 hidden"></p>
                     </div>
-                    <div class="mt-6 pt-4 border-t border-gray-200">
-                        <p class="flex justify-between items-center text-lg font-bold">
-                            <span>Estimated Total:</span>
-                            <span id="totalPrice" class="gravity-green-text">$0.00</span>
-                        </p>
+                    <div class="mt-4 pt-4 border-t border-gray-200">
+                        <div class="flex justify-between items-center text-lg font-bold">
+                            <span>Total:</span>
+                            <div id="totalPrice" class="text-right gravity-green-text">
+                                $0.00
+                            </div>
+                        </div>
                     </div>
                     
                     <div class="mt-6 space-y-4">
@@ -151,7 +153,7 @@
 
                     <div class="mt-6">
                         <p class="text-sm text-gray-500">
-                            You will receive a link via Slack to securely pay via ACH.
+                            An invoice will be sent from accounting.
                         </p>
                     </div>
 
@@ -166,7 +168,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // This is the inventory data. You can easily adjust it by editing this array.
             const inventory = [
                 { id: '1', name: 'Water Bottle', price: 15.00, imageUrl: 'https://placehold.co/400x300/a3b1c6/ffffff?text=Water+Bottle', description: 'A sleek, branded water bottle.' },
                 { id: '2', name: 'Hoodie', price: 45.00, imageUrl: 'https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/a78e1178aaba17bdac6d69df58eddd79b6d3e4c7/images/Gravity%20hoodie%20light%20.jpg?raw=true', description: 'Cozy and comfortable company hoodie.', sizes: ['S', 'M', 'L', 'XL', '2XL'] },
@@ -175,6 +176,14 @@
                 { id: '5', name: 'Coffee Mug', price: 12.50, imageUrl: 'https://placehold.co/400x300/6b7280/ffffff?text=Mug', description: 'Start your day with a branded mug.' },
                 { id: '6', name: 'Laptop Sticker', price: 5.00, imageUrl: 'https://placehold.co/400x300/4a5568/ffffff?text=Sticker', description: 'Show off your company pride.' }
             ];
+
+            // --- COUPON CONFIGURATION ---
+            const coupons = {
+                'GRAVITY10': { type: 'percent', value: 0.10 }, // 10% off
+                'WELCOME5':  { type: 'fixed', value: 5.00 }    // $5.00 off
+            };
+            let appliedCoupon = null;
+            // ----------------------------
 
             const swagList = document.getElementById('swagList');
             const cartItemsContainer = document.getElementById('cartItems');
@@ -185,12 +194,15 @@
             const confirmationPage = document.getElementById('confirmationPage');
             const confirmationCard = document.getElementById('confirmationCard');
 
-            let cart = {}; // Stores { itemId_size: quantity }
+            // Coupon Elements
+            const couponInput = document.getElementById('couponInput');
+            const applyCouponBtn = document.getElementById('applyCouponBtn');
+            const couponMessage = document.getElementById('couponMessage');
+
+            let cart = {}; 
             
-            // Your Google Form URL.
             const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSc5jB0nhVWjpjHoViUiEJqX7BBheodhDNge6Pzb12yhTrnG3Q/formResponse';
             
-            // Password for the site (for front-end protection only)
             const ACCESS_PASSWORD = 'GravitySwag123';
             const passwordScreen = document.getElementById('password-screen');
             const passwordInput = document.getElementById('password-input');
@@ -207,12 +219,37 @@
                 }
             });
 
-            // Allow hitting Enter key to submit password
             passwordInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
                     passwordSubmitBtn.click();
                 }
             });
+
+            // --- COUPON LOGIC ---
+            applyCouponBtn.addEventListener('click', () => {
+                const code = couponInput.value.trim().toUpperCase();
+                
+                // Reset UI
+                couponMessage.classList.add('hidden');
+                couponMessage.className = 'text-sm mt-2 hidden'; 
+
+                if (!code) return;
+
+                if (coupons[code]) {
+                    appliedCoupon = { code: code, ...coupons[code] };
+                    couponMessage.textContent = `Coupon "${code}" applied!`;
+                    couponMessage.classList.remove('hidden');
+                    couponMessage.classList.add('text-green-600');
+                    updateCart(); 
+                } else {
+                    appliedCoupon = null;
+                    couponMessage.textContent = 'Invalid coupon code.';
+                    couponMessage.classList.remove('hidden');
+                    couponMessage.classList.add('text-red-500');
+                    updateCart(); 
+                }
+            });
+            // --------------------
 
             function renderSwagList() {
                 swagList.innerHTML = '';
@@ -261,12 +298,12 @@
                 });
             }
 
-            // Function to update the floating cart display and total price
             function updateCart() {
                 cartItemsContainer.innerHTML = '';
-                let total = 0;
+                let subtotal = 0;
                 let cartIsEmpty = true;
 
+                // 1. Calculate Items Subtotal
                 for (const itemKey in cart) {
                     if (cart[itemKey] > 0) {
                         cartIsEmpty = false;
@@ -274,7 +311,7 @@
                         const item = inventory.find(i => i.id === itemId);
                         if (item) {
                             const itemTotal = item.price * cart[itemKey];
-                            total += itemTotal;
+                            subtotal += itemTotal;
 
                             const cartItem = document.createElement('div');
                             cartItem.className = 'flex items-center justify-between';
@@ -289,12 +326,40 @@
 
                 if (cartIsEmpty) {
                     cartItemsContainer.innerHTML = '<p class="text-center text-gray-500">Your cart is empty.</p>';
+                    // Reset coupon if cart is emptied
+                    appliedCoupon = null; 
+                    couponInput.value = '';
+                    couponMessage.classList.add('hidden');
                 }
 
-                totalPriceElement.textContent = `$${total.toFixed(2)}`;
+                // 2. Calculate Discount
+                let discountAmount = 0;
+                if (appliedCoupon && subtotal > 0) {
+                    if (appliedCoupon.type === 'percent') {
+                        discountAmount = subtotal * appliedCoupon.value;
+                    } else if (appliedCoupon.type === 'fixed') {
+                        discountAmount = appliedCoupon.value;
+                    }
+                    if (discountAmount > subtotal) discountAmount = subtotal;
+                }
+
+                const finalTotal = subtotal - discountAmount;
+
+                // 3. Update Display
+                if (discountAmount > 0) {
+                    totalPriceElement.innerHTML = `
+                        <span class="text-gray-500 text-sm line-through block">$${subtotal.toFixed(2)}</span>
+                        <span class="text-green-600 block">-$${discountAmount.toFixed(2)}</span>
+                        <span>$${finalTotal.toFixed(2)}</span>
+                    `;
+                } else {
+                    totalPriceElement.textContent = `$${finalTotal.toFixed(2)}`;
+                }
+                
+                // Store final total text for submission
+                totalPriceElement.dataset.cleanValue = `$${finalTotal.toFixed(2)}`;
             }
 
-            // Event delegation for Add/Remove buttons
             swagList.addEventListener('click', (e) => {
                 const addButton = e.target.closest('.add-to-cart-btn');
                 const removeButton = e.target.closest('.remove-from-cart-btn');
@@ -321,7 +386,7 @@
                     }
                 }
 
-                // Update the quantity display on the product card
+                // Update quantities on cards
                 if (addButton || removeButton) {
                      const buttonElement = addButton || removeButton;
                      const itemId = buttonElement.dataset.id;
@@ -341,7 +406,6 @@
                 updateCart();
             });
 
-            // Handle form submission
             orderForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 const userName = document.getElementById('userName').value.trim();
@@ -353,7 +417,6 @@
                     return;
                 }
                 
-                // Format the selected items to include sizes
                 const selectedItems = Object.entries(cart)
                     .filter(([itemKey, quantity]) => quantity > 0)
                     .map(([itemKey, quantity]) => {
@@ -363,23 +426,27 @@
                             return `${quantity}x ${item.name}${size ? ' (' + size + ')' : ''}`;
                         }
                         return '';
-                    }).filter(Boolean).join(', '); // Remove any empty strings and join
+                    }).filter(Boolean).join(', ');
                 
                 if (!selectedItems) {
                     showMessage('Your cart is empty. Please add items.', 'bg-red-100 text-red-800');
                     return;
                 }
                 
-                // Prepare data for Google Form submission
-                const total = totalPriceElement.textContent;
-                const formData = new FormData();
+                // Prepare final total string
+                let totalToSend = totalPriceElement.dataset.cleanValue || totalPriceElement.textContent;
                 
-                // These have been updated with your Google Form's unique IDs.
+                // Append Coupon Info if applicable so accounting sees it
+                if (appliedCoupon) {
+                    totalToSend += ` (Code: ${appliedCoupon.code})`;
+                }
+
+                const formData = new FormData();
                 formData.append('entry.1520971529', userName);
                 formData.append('entry.281140994', userEmail);
                 formData.append('entry.963635525', shippingAddress);
                 formData.append('entry.751079573', selectedItems);
-                formData.append('entry.1759210502', total);
+                formData.append('entry.1759210502', totalToSend);
                 
                 try {
                     const response = await fetch(googleFormUrl, {
@@ -391,9 +458,16 @@
                     showConfirmationPage();
 
                     cart = {};
+                    appliedCoupon = null; // Reset coupon
+                    couponInput.value = ''; // Clear input
+                    couponMessage.classList.add('hidden');
+                    
                     orderForm.reset();
                     renderSwagList();
                     updateCart();
+                    
+                    // Reset card quantities visually
+                    document.querySelectorAll('[id^="quantity-"]').forEach(el => el.textContent = '0');
 
                 } catch (error) {
                     console.error('Submission error:', error);
@@ -430,7 +504,6 @@
                 }, 1000);
             }
 
-            // Initial render
             renderSwagList();
             updateCart();
         });

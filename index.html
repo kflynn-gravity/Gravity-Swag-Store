@@ -31,19 +31,46 @@
 </head>
 <body class="text-gray-800">
 
-    <div id="password-screen" class="fixed inset-0 bg-gray-100 flex items-center justify-center z-50">
-        <div class="bg-white p-8 rounded-lg shadow-xl max-w-sm w-full text-center">
-            <h2 class="text-3xl font-bold mb-4">Access Required</h2>
-            <input type="password" id="password-input" class="w-full px-4 py-2 border rounded-md" placeholder="Enter password">
-            <button id="password-submit-btn" class="mt-4 w-full gravity-blue text-white font-semibold py-2 rounded-md">Enter</button>
-            <div id="password-error" class="mt-2 text-red-500 text-sm hidden">Incorrect password.</div>
+    <div id="password-screen" class="fixed inset-0 bg-gray-100 flex items-center justify-center z-50 p-4 overflow-y-auto">
+        <div class="bg-white p-8 rounded-lg shadow-xl max-w-2xl w-full my-auto">
+            <div class="text-center mb-6">
+                <img src="https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/download.png?raw=true" alt="Gravity Logo" class="h-12 w-12 mx-auto mb-4">
+                <h2 class="text-3xl font-bold text-gray-900">Gravity Swag Store</h2>
+            </div>
+
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6 text-sm text-gray-700 space-y-3">
+                <p class="font-semibold text-blue-800 text-base">About the Store</p>
+                <p>This store was created to provide high-quality Gravity-branded gear at the request of our team. Items are priced approximately at cost, with occasional coupon codes available to help reduce your total.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2 mt-2">
+                    <ul class="list-disc ml-5 space-y-1">
+                        <li><strong>All sales are final.</strong></li>
+                        <li>Items are subject to availability.</li>
+                        <li>Shipping takes 3–5 business days after payment.</li>
+                    </ul>
+                    <ul class="list-disc ml-5 space-y-1">
+                        <li>Payment links are sent by Accounting.</li>
+                        <li>Orders ship once payment is received.</li>
+                        <li>Reach out to <strong>TA</strong> for support.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="max-w-xs mx-auto">
+                <label class="block text-sm font-medium text-gray-700 mb-1 text-center">Enter Password to Shop</label>
+                <input type="password" id="password-input" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Password">
+                <button id="password-submit-btn" class="mt-4 w-full gravity-blue text-white font-semibold py-2 rounded-md transition-colors hover:gravity-blue-hover">
+                    Enter Store
+                </button>
+                <div id="password-error" class="mt-2 text-red-500 text-sm hidden text-center font-semibold">Incorrect password. Please try again.</div>
+            </div>
         </div>
     </div>
 
     <div id="confirmationPage" class="fixed inset-0 bg-gray-50 flex items-center justify-center p-6 z-50 hidden">
         <div class="bg-white p-8 rounded-lg shadow-2xl max-w-xl text-center">
-            <h1 class="text-3xl font-bold text-gray-900 mb-2">Order Confirmed!</h1>
-            <p class="text-gray-600">Redirecting in <span id="countdown">5</span> seconds...</p>
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">Order Submitted!</h1>
+            <p class="text-gray-600">Check your email for a payment link from Accounting soon. Redirecting in <span id="countdown">5</span> seconds...</p>
         </div>
     </div>
     
@@ -75,9 +102,9 @@
                     </div>
                     
                     <div class="mt-6 space-y-4">
-                        <input type="text" id="userName" class="w-full border rounded px-3 py-2" placeholder="Full Name">
-                        <input type="email" id="userEmail" class="w-full border rounded px-3 py-2" placeholder="Email">
-                        <textarea id="shippingAddress" class="w-full border rounded px-3 py-2" placeholder="Shipping Address"></textarea>
+                        <input type="text" id="userName" required class="w-full border rounded px-3 py-2" placeholder="Full Name">
+                        <input type="email" id="userEmail" required class="w-full border rounded px-3 py-2" placeholder="Email">
+                        <textarea id="shippingAddress" required class="w-full border rounded px-3 py-2" placeholder="Shipping Address"></textarea>
                     </div>
 
                     <button type="submit" class="mt-6 w-full text-white font-semibold py-3 rounded gravity-blue gravity-blue-hover">Submit Order</button>
@@ -90,10 +117,10 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const inventory = [
-                { id: '1', name: 'Gravity T-Shirt', price: 20.00, imageUrl: 'images/gravity-tshirt.jpg', description: 'Standard T-Shirt', sizes: ['S', 'M', 'L', 'XL'] },
-                { id: '2', name: 'Gravity T-Shirt (New Hire)', price: 20.00, imageUrl: 'images/gravity-tshirt-new.jpg', description: 'New Hire Edition', sizes: ['S', 'M', 'L', 'XL'] },
-                { id: '3', name: 'Gravity Sweat Shirts - Men', price: 40.00, imageUrl: 'images/mens-sweatshirt.jpg', description: 'Men\'s cut', sizes: ['S', 'M', 'L', 'XL'] },
-                { id: '4', name: 'Gravity Sweat Shirts - Women', price: 40.00, imageUrl: 'images/womens-sweatshirt.jpg', description: 'Women\'s cut', sizes: ['S', 'M', 'L', 'XL'] },
+                { id: '1', name: 'Gravity T-Shirt', price: 20.00, imageUrl: 'images/gravity-tshirt.jpg', description: 'Standard T-Shirt', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'] },
+                { id: '2', name: 'Gravity T-Shirt (New Hire Swag)', price: 20.00, imageUrl: 'images/gravity-tshirt-new.jpg', description: 'New Hire Edition', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL', '4XL'] },
+                { id: '3', name: 'Gravity Sweat Shirts - Men', price: 40.00, imageUrl: 'images/mens-sweatshirt.jpg', description: 'Men\'s cut', sizes: ['S', 'M', 'L', 'XL', '2XL'] },
+                { id: '4', name: 'Gravity Sweat Shirts - Women', price: 40.00, imageUrl: 'images/womens-sweatshirt.jpg', description: 'Women\'s cut', sizes: ['S', 'M', 'L', 'XL', '2XL'] },
                 { id: '5', name: 'Gravity Branded Hi-liter', price: 2.00, imageUrl: 'images/hiliter.jpg', description: 'Office essential', isAddon: true },
                 { id: '6', name: 'Gravity Branded Notebook', price: 25.00, imageUrl: 'images/full-notebook.jpg', description: 'Large notebook' },
                 { id: '7', name: 'Gravity Pens', price: .50, imageUrl: 'images/pens.jpg', description: 'Ballpoint pen', isAddon: true },
@@ -105,7 +132,6 @@
             const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSc5jB0nhVWjpjHoViUiEJqX7BBheodhDNge6Pzb12yhTrnG3Q/formResponse';
             const ACCESS_PASSWORD = 'GravitySwag123';
 
-            // DOM Elements
             const passwordSubmitBtn = document.getElementById('password-submit-btn');
             const passwordInput = document.getElementById('password-input');
             const mainContent = document.getElementById('mainContent');
@@ -130,8 +156,6 @@
                     const hasSizes = item.sizes && item.sizes.length > 0;
                     const card = document.createElement('div');
                     card.className = 'bg-white rounded-lg shadow overflow-hidden relative';
-                    
-                    // Add visual badge for Add-on items
                     const addonBadge = item.isAddon ? `<span class="absolute top-2 right-2 bg-yellow-100 text-yellow-800 text-xs font-bold px-2 py-1 rounded">ADD-ON ONLY</span>` : '';
 
                     card.innerHTML = `
@@ -140,7 +164,9 @@
                         <div class="p-4">
                             <h3 class="font-bold">${item.name}</h3>
                             <p class="text-sm text-gray-500">${item.description}</p>
-                            ${hasSizes ? `<select id="size-${item.id}" class="w-full mt-2 border rounded text-sm"><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option></select>` : ''}
+                            ${hasSizes ? `<select id="size-${item.id}" class="w-full mt-2 border rounded text-sm">
+                                ${item.sizes.map(s => `<option value="${s}">${s}</option>`).join('')}
+                            </select>` : ''}
                             <div class="mt-4 flex justify-between items-center">
                                 <span class="font-bold gravity-green-text">$${item.price.toFixed(2)}</span>
                                 <div class="flex items-center gap-2">
@@ -193,29 +219,22 @@
 
             orderForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
-                
                 let hasMainItem = false;
                 let hasAddonOnly = false;
                 let itemsList = [];
 
                 for (let key in cart) {
                     if (cart[key] > 0) {
-                        const [id] = key.split('_');
+                        const [id, size] = key.split('_');
                         const item = inventory.find(i => i.id === id);
-                        
-                        // FIX: Explicitly check the base ID
-                        if (addonIds.includes(id)) {
-                            hasAddonOnly = true;
-                        } else {
-                            hasMainItem = true;
-                        }
-                        itemsList.push(`${cart[key]}x ${item.name}`);
+                        if (addonIds.includes(id)) hasAddonOnly = true;
+                        else hasMainItem = true;
+                        itemsList.push(`${cart[key]}x ${item.name}${size ? ' ('+size+')' : ''}`);
                     }
                 }
 
-                // VALIDATION CHECK
                 if (hasAddonOnly && !hasMainItem) {
-                    showMessage('Highlighters and pens are add-on only. Please add a shirt, notebook, or bottle to your order.', 'bg-red-100 text-red-800');
+                    showMessage('Highlighters and pens are add-on only. Please add a shirt, notebook, or bottle.', 'bg-red-100 text-red-800');
                     return;
                 }
 
@@ -234,7 +253,12 @@
                 try {
                     await fetch(googleFormUrl, { method: 'POST', mode: 'no-cors', body: formData });
                     document.getElementById('confirmationPage').classList.remove('hidden');
-                    setTimeout(() => location.reload(), 5000);
+                    let count = 5;
+                    setInterval(() => {
+                        count--;
+                        document.getElementById('countdown').textContent = count;
+                        if(count <= 0) location.reload();
+                    }, 1000);
                 } catch (err) {
                     showMessage('Error sending order.', 'bg-red-100 text-red-800');
                 }

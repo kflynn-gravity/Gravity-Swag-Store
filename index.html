@@ -6,7 +6,6 @@
     <title>Gravity Swag Store</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Proxima Nova font import */
         @font-face {
             font-family: 'Proxima Nova';
             src: url('fonts/ProximaNova-Regular.woff2') format('woff2'),
@@ -14,48 +13,20 @@
             font-weight: normal;
             font-style: normal;
         }
-        @font-face {
-            font-family: 'Proxima Nova';
-            src: url('fonts/ProximaNova-Bold.woff2') format('woff2'),
-                 url('fonts/ProximaNova-Bold.woff') format('woff');
-            font-weight: bold;
-            font-style: normal;
-        }
-
         body {
             font-family: 'Proxima Nova', sans-serif;
             background-color: #f7fafc;
         }
-        .container {
-            max-width: 1200px;
-        }
-        @media (min-width: 1024px) {
-            .swag-list-container {
-                max-height: calc(100vh - 12rem);
-                overflow-y: auto;
-            }
-        }
+        .container { max-width: 1200px; }
         .cart-container {
             position: sticky;
             top: 2rem;
             max-height: calc(100vh - 4rem);
             overflow-y: auto; 
         }
-
-        .gravity-blue {
-            --tw-bg-opacity: 1;
-            background-color: #0047a0;
-        }
-        .gravity-blue-hover:hover {
-            --tw-bg-opacity: 1;
-            background-color: #003d8a;
-        }
-        .gravity-blue-text {
-            color: #0047a0;
-        }
-        .gravity-green-text {
-            color: #16a34a;
-        }
+        .gravity-blue { background-color: #0047a0; }
+        .gravity-blue-hover:hover { background-color: #003d8a; }
+        .gravity-green-text { color: #16a34a; }
     </style>
 </head>
 <body class="text-gray-800">
@@ -63,23 +34,16 @@
     <div id="password-screen" class="fixed inset-0 bg-gray-100 flex items-center justify-center z-50">
         <div class="bg-white p-8 rounded-lg shadow-xl max-w-sm w-full text-center">
             <h2 class="text-3xl font-bold mb-4">Access Required</h2>
-            <p class="text-gray-600 mb-6">Please enter the password to access the Swag Store.</p>
-            <input type="password" id="password-input" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter password">
-            <button id="password-submit-btn" class="mt-4 w-full gravity-blue text-white font-semibold py-2 rounded-md transition-colors hover:gravity-blue-hover">
-                Enter
-            </button>
-            <div id="password-error" class="mt-2 text-red-500 text-sm hidden">Incorrect password. Please try again.</div>
+            <input type="password" id="password-input" class="w-full px-4 py-2 border rounded-md" placeholder="Enter password">
+            <button id="password-submit-btn" class="mt-4 w-full gravity-blue text-white font-semibold py-2 rounded-md">Enter</button>
+            <div id="password-error" class="mt-2 text-red-500 text-sm hidden">Incorrect password.</div>
         </div>
     </div>
 
     <div id="confirmationPage" class="fixed inset-0 bg-gray-50 flex items-center justify-center p-6 z-50 hidden">
-        <div class="bg-white p-8 rounded-lg shadow-2xl max-w-xl text-center transition-transform duration-500 transform scale-95 opacity-0" id="confirmationCard">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-green-500 mx-auto mb-4" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-            </svg>
+        <div class="bg-white p-8 rounded-lg shadow-2xl max-w-xl text-center">
             <h1 class="text-3xl font-bold text-gray-900 mb-2">Order Confirmed!</h1>
-            <p class="text-gray-600 mb-4">Your order has been submitted and a confirmation email is on its way.</p>
-            <p class="text-sm font-semibold text-gray-500">Redirecting in <span id="countdown">5</span> seconds...</p>
+            <p class="text-gray-600">Redirecting in <span id="countdown">5</span> seconds...</p>
         </div>
     </div>
     
@@ -87,65 +51,37 @@
         <header class="bg-white shadow-sm sticky top-0 z-50">
             <div class="container mx-auto px-6 py-4 flex justify-between items-center">
                 <div class="text-2xl font-bold text-gray-900 flex items-center space-x-2">
-                    <img src="https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/download.png?raw=true" alt="Gravity Payments Logo" class="h-8 w-8">
-                    <a href="#">Gravity Swag Store</a>
+                    <img src="https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/download.png?raw=true" alt="Logo" class="h-8 w-8">
+                    <span>Gravity Swag Store</span>
                 </div>
             </div>
         </header>
 
         <main class="container mx-auto px-6 py-12 flex flex-col lg:flex-row gap-8">
             <div class="flex-1">
-                <div class="mb-8 text-center md:text-left">
-                    <h1 class="text-4xl font-bold mb-2">Welcome to the Gravity Swag Store!</h1>
-                    <p class="text-lg text-gray-600">Select your favorite gear below. Your estimated total will be tracked in the cart.</p>
-                </div>
                 <div id="swagList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
             </div>
 
             <aside class="w-full lg:w-1/3">
                 <form id="orderForm" class="bg-white p-6 rounded-lg shadow-lg cart-container">
-                    <h2 class="text-2xl font-bold mb-4 flex items-center space-x-2">
-                        <img src="https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/download.png?raw=true" alt="Logo" class="h-6 w-6">
-                        <span>Your Cart</span>
-                    </h2>
+                    <h2 class="text-2xl font-bold mb-4">Your Cart</h2>
+                    <div id="cartItems" class="space-y-4 mb-4"></div>
                     
-                    <div id="cartItems" class="space-y-4"></div>
-
-                    <div class="mt-4 border-t border-gray-200 pt-4">
-                        <label for="couponInput" class="block text-sm font-medium text-gray-700">Coupon Code</label>
-                        <div class="flex space-x-2 mt-1">
-                            <input type="text" id="couponInput" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2" placeholder="Enter code">
-                            <button type="button" id="applyCouponBtn" class="bg-gray-200 text-gray-800 font-semibold px-4 py-2 rounded-md hover:bg-gray-300">Apply</button>
-                        </div>
-                        <p id="couponMessage" class="text-sm mt-2 hidden"></p>
-                    </div>
-
-                    <div class="mt-4 pt-4 border-t border-gray-200">
+                    <div class="border-t pt-4">
                         <div class="flex justify-between items-center text-lg font-bold">
                             <span>Total:</span>
-                            <div id="totalPrice" class="text-right gravity-green-text">$0.00</div>
+                            <div id="totalPrice" class="gravity-green-text">$0.00</div>
                         </div>
                     </div>
                     
                     <div class="mt-6 space-y-4">
-                        <div>
-                            <label for="userName" class="block text-sm font-medium text-gray-700">Your Name</label>
-                            <input type="text" id="userName" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm px-3 py-2" placeholder="Full name">
-                        </div>
-                        <div>
-                            <label for="userEmail" class="block text-sm font-medium text-gray-700">Email Address</label>
-                            <input type="email" id="userEmail" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm px-3 py-2" placeholder="Email for confirmation">
-                        </div>
-                        <div>
-                            <label for="shippingAddress" class="block text-sm font-medium text-gray-700">Shipping Address</label>
-                            <textarea id="shippingAddress" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm px-3 py-2" placeholder="Full shipping address"></textarea>
-                        </div>
+                        <input type="text" id="userName" class="w-full border rounded px-3 py-2" placeholder="Full Name">
+                        <input type="email" id="userEmail" class="w-full border rounded px-3 py-2" placeholder="Email">
+                        <textarea id="shippingAddress" class="w-full border rounded px-3 py-2" placeholder="Shipping Address"></textarea>
                     </div>
 
-                    <button type="submit" class="mt-6 w-full text-white font-semibold py-3 rounded-md gravity-blue gravity-blue-hover">
-                        Submit Order
-                    </button>
-                    <div id="messageBox" class="mt-4 p-3 rounded-md hidden"></div>
+                    <button type="submit" class="mt-6 w-full text-white font-semibold py-3 rounded gravity-blue gravity-blue-hover">Submit Order</button>
+                    <div id="messageBox" class="mt-4 p-3 rounded hidden"></div>
                 </form>
             </aside>
         </main>
@@ -154,27 +90,24 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const inventory = [
-                { id: '1', name: 'Gravity T-Shirt', price: 20.00, imageUrl: 'images/gravity-tshirt.jpg', description: 'Standard Gravity T-Shirt.', sizes: ['S', 'M', 'L', 'XL', '3XL'] },
-                { id: '2', name: 'Gravity T-Shirt (New Hire Swag)', price: 20.00, imageUrl: 'images/gravity-tshirt-new.jpg', description: 'New Hire Swag Edition.', sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL', '4XL'] },
-                { id: '3', name: 'Gravity Sweat Shirts - Men', price: 40.00, imageUrl: 'images/mens-sweatshirt.jpg', description: 'Men\'s cut sweatshirt.', sizes: ['S', 'M', 'L', 'XL'] },
-                { id: '4', name: 'Gravity Sweat Shirts - Women', price: 40.00, imageUrl: 'images/womens-sweatshirt.jpg', description: 'Women\'s cut sweatshirt.', sizes: ['S', 'M', 'L', 'XL', '2XL'] },
-                { id: '5', name: 'Gravity Branded Hi-liter', price: 2.00, imageUrl: 'images/hiliter.jpg', description: 'Office essential highlighter.' },
-                { id: '6', name: 'Gravity Branded full size notebook', price: 25.00, imageUrl: 'images/full-notebook.jpg', description: 'Large branded notebook.' },
-                { id: '7', name: 'Gravity Pens', price: .50, imageUrl: 'images/pens.jpg', description: 'Classic branded ballpoint pen.' },
-                { id: '8', name: 'Gravity stainless steel 32 oz waterbottle (new hire)', price: 25.00, imageUrl: 'images/steel-bottle-new.jpg', description: 'Large 32oz water bottle.' }
+                { id: '1', name: 'Gravity T-Shirt', price: 20.00, imageUrl: 'images/gravity-tshirt.jpg', description: 'Standard T-Shirt', sizes: ['S', 'M', 'L', 'XL'] },
+                { id: '2', name: 'Gravity T-Shirt (New Hire)', price: 20.00, imageUrl: 'images/gravity-tshirt-new.jpg', description: 'New Hire Edition', sizes: ['S', 'M', 'L', 'XL'] },
+                { id: '3', name: 'Gravity Sweat Shirts - Men', price: 40.00, imageUrl: 'images/mens-sweatshirt.jpg', description: 'Men\'s cut', sizes: ['S', 'M', 'L', 'XL'] },
+                { id: '4', name: 'Gravity Sweat Shirts - Women', price: 40.00, imageUrl: 'images/womens-sweatshirt.jpg', description: 'Women\'s cut', sizes: ['S', 'M', 'L', 'XL'] },
+                { id: '5', name: 'Gravity Branded Hi-liter', price: 2.00, imageUrl: 'images/hiliter.jpg', description: 'Office essential', isAddon: true },
+                { id: '6', name: 'Gravity Branded Notebook', price: 25.00, imageUrl: 'images/full-notebook.jpg', description: 'Large notebook' },
+                { id: '7', name: 'Gravity Pens', price: .50, imageUrl: 'images/pens.jpg', description: 'Ballpoint pen', isAddon: true },
+                { id: '8', name: 'Gravity Waterbottle', price: 25.00, imageUrl: 'images/steel-bottle-new.jpg', description: '32oz Steel Bottle' }
             ];
 
-            const addonIds = ['5', '7']; // IDs for Hi-liter and Pens
-            const coupons = { 'GRAVITY10': { type: 'fixed', value: 10.00 } };
-            let appliedCoupon = null;
+            const addonIds = ['5', '7']; 
             let cart = {}; 
-
             const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSc5jB0nhVWjpjHoViUiEJqX7BBheodhDNge6Pzb12yhTrnG3Q/formResponse';
             const ACCESS_PASSWORD = 'GravitySwag123';
 
-            const passwordScreen = document.getElementById('password-screen');
-            const passwordInput = document.getElementById('password-input');
+            // DOM Elements
             const passwordSubmitBtn = document.getElementById('password-submit-btn');
+            const passwordInput = document.getElementById('password-input');
             const mainContent = document.getElementById('mainContent');
             const swagList = document.getElementById('swagList');
             const cartItemsContainer = document.getElementById('cartItems');
@@ -182,10 +115,9 @@
             const messageBox = document.getElementById('messageBox');
             const orderForm = document.getElementById('orderForm');
 
-            // Password Protection
             passwordSubmitBtn.addEventListener('click', () => {
                 if (passwordInput.value === ACCESS_PASSWORD) {
-                    passwordScreen.classList.add('hidden');
+                    document.getElementById('password-screen').classList.add('hidden');
                     mainContent.classList.remove('hidden');
                 } else {
                     document.getElementById('password-error').classList.remove('hidden');
@@ -197,24 +129,24 @@
                 inventory.forEach(item => {
                     const hasSizes = item.sizes && item.sizes.length > 0;
                     const card = document.createElement('div');
-                    card.className = 'bg-white rounded-lg shadow-lg overflow-hidden transition-transform hover:scale-105';
+                    card.className = 'bg-white rounded-lg shadow overflow-hidden relative';
+                    
+                    // Add visual badge for Add-on items
+                    const addonBadge = item.isAddon ? `<span class="absolute top-2 right-2 bg-yellow-100 text-yellow-800 text-xs font-bold px-2 py-1 rounded">ADD-ON ONLY</span>` : '';
+
                     card.innerHTML = `
+                        ${addonBadge}
                         <img src="${item.imageUrl}" class="w-full h-48 object-cover">
                         <div class="p-4">
-                            <h3 class="text-xl font-bold">${item.name}</h3>
+                            <h3 class="font-bold">${item.name}</h3>
                             <p class="text-sm text-gray-500">${item.description}</p>
-                            ${hasSizes ? `
-                                <div class="mt-2">
-                                    <select id="size-${item.id}" class="w-full rounded-md border-gray-300 text-sm">
-                                        ${item.sizes.map(s => `<option value="${s}">${s}</option>`).join('')}
-                                    </select>
-                                </div>` : ''}
+                            ${hasSizes ? `<select id="size-${item.id}" class="w-full mt-2 border rounded text-sm"><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option></select>` : ''}
                             <div class="mt-4 flex justify-between items-center">
-                                <span class="text-xl font-bold gravity-green-text">$${item.price.toFixed(2)}</span>
-                                <div class="flex items-center space-x-2">
-                                    <button data-id="${item.id}" data-has-sizes="${hasSizes}" class="remove-from-cart-btn bg-gray-200 p-1 rounded-md">-</button>
-                                    <span id="quantity-${item.id}" class="font-semibold">0</span>
-                                    <button data-id="${item.id}" data-has-sizes="${hasSizes}" class="add-to-cart-btn gravity-blue text-white p-1 rounded-md">+</button>
+                                <span class="font-bold gravity-green-text">$${item.price.toFixed(2)}</span>
+                                <div class="flex items-center gap-2">
+                                    <button data-id="${item.id}" data-has-sizes="${hasSizes}" class="rem-btn bg-gray-200 px-2 rounded">-</button>
+                                    <span id="qty-${item.id}">0</span>
+                                    <button data-id="${item.id}" data-has-sizes="${hasSizes}" class="add-btn gravity-blue text-white px-2 rounded">+</button>
                                 </div>
                             </div>
                         </div>`;
@@ -224,106 +156,93 @@
 
             function updateCart() {
                 cartItemsContainer.innerHTML = '';
-                let subtotal = 0;
-                let cartIsEmpty = true;
-
+                let total = 0;
+                let empty = true;
                 for (const key in cart) {
                     if (cart[key] > 0) {
-                        cartIsEmpty = false;
-                        const [id, size] = key.split('_');
+                        empty = false;
+                        const [id] = key.split('_');
                         const item = inventory.find(i => i.id === id);
-                        const lineTotal = item.price * cart[key];
-                        subtotal += lineTotal;
-
+                        total += item.price * cart[key];
                         const div = document.createElement('div');
                         div.className = 'flex justify-between text-sm';
-                        div.innerHTML = `<span>${item.name}${size ? ' ('+size+')' : ''} x${cart[key]}</span><span>$${lineTotal.toFixed(2)}</span>`;
+                        div.innerHTML = `<span>${item.name} x${cart[key]}</span><span>$${(item.price * cart[key]).toFixed(2)}</span>`;
                         cartItemsContainer.appendChild(div);
                     }
                 }
-                
-                let discount = (appliedCoupon && subtotal > 0) ? Math.min(subtotal, appliedCoupon.value) : 0;
-                let finalTotal = subtotal - discount;
-                totalPriceElement.textContent = `$${finalTotal.toFixed(2)}`;
-                totalPriceElement.dataset.cleanValue = `$${finalTotal.toFixed(2)}`;
-                if (cartIsEmpty) cartItemsContainer.innerHTML = '<p class="text-center text-gray-500">Cart is empty.</p>';
+                totalPriceElement.textContent = `$${total.toFixed(2)}`;
+                if (empty) cartItemsContainer.innerHTML = '<p class="text-gray-400 text-center">Empty</p>';
             }
 
             swagList.addEventListener('click', (e) => {
-                const addBtn = e.target.closest('.add-to-cart-btn');
-                const remBtn = e.target.closest('.remove-from-cart-btn');
+                const addBtn = e.target.closest('.add-btn');
+                const remBtn = e.target.closest('.rem-btn');
                 if (!addBtn && !remBtn) return;
-
                 const btn = addBtn || remBtn;
                 const id = btn.dataset.id;
                 const size = btn.dataset.hasSizes === 'true' ? document.getElementById(`size-${id}`).value : '';
                 const key = `${id}_${size}`;
-
                 if (addBtn) cart[key] = (cart[key] || 0) + 1;
                 else if (remBtn && cart[key] > 0) cart[key]--;
-
-                let totalQty = 0;
-                for (const k in cart) if (k.startsWith(id + '_')) totalQty += cart[k];
-                document.getElementById(`quantity-${id}`).textContent = totalQty;
+                
+                let q = 0;
+                for (let k in cart) if (k.startsWith(id + '_')) q += cart[k];
+                document.getElementById(`qty-${id}`).textContent = q;
                 updateCart();
             });
 
             orderForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
-                const name = document.getElementById('userName').value.trim();
-                const email = document.getElementById('userEmail').value.trim();
-                const address = document.getElementById('shippingAddress').value.trim();
-
-                if (!name || !email || !address) {
-                    showMessage('Missing contact or shipping info.', 'bg-red-100 text-red-800');
-                    return;
-                }
-
-                let hasMainItem = false;
-                let hasAddonItem = false;
                 
-                const selectedItems = Object.entries(cart)
-                    .filter(([_, qty]) => qty > 0)
-                    .map(([key, qty]) => {
-                        const [id, size] = key.split('_');
+                let hasMainItem = false;
+                let hasAddonOnly = false;
+                let itemsList = [];
+
+                for (let key in cart) {
+                    if (cart[key] > 0) {
+                        const [id] = key.split('_');
                         const item = inventory.find(i => i.id === id);
-                        if (addonIds.includes(id)) hasAddonItem = true;
-                        else hasMainItem = true;
-                        return `${qty}x ${item.name}${size ? ' ('+size+')' : ''}`;
-                    }).join(', ');
+                        
+                        // FIX: Explicitly check the base ID
+                        if (addonIds.includes(id)) {
+                            hasAddonOnly = true;
+                        } else {
+                            hasMainItem = true;
+                        }
+                        itemsList.push(`${cart[key]}x ${item.name}`);
+                    }
+                }
 
-                // ADD-ON VALIDATION LOGIC
-                if (hasAddonItem && !hasMainItem) {
-                    showMessage('Highlighters and pens can only be ordered as add-ons to larger items.', 'bg-red-100 text-red-800');
+                // VALIDATION CHECK
+                if (hasAddonOnly && !hasMainItem) {
+                    showMessage('Highlighters and pens are add-on only. Please add a shirt, notebook, or bottle to your order.', 'bg-red-100 text-red-800');
                     return;
                 }
 
-                if (!selectedItems) {
-                    showMessage('Cart is empty.', 'bg-red-100 text-red-800');
+                if (itemsList.length === 0) {
+                    showMessage('Your cart is empty.', 'bg-red-100 text-red-800');
                     return;
                 }
 
-                let totalStr = totalPriceElement.dataset.cleanValue + (appliedCoupon ? ` (Code: ${appliedCoupon.code})` : '');
                 const formData = new FormData();
-                formData.append('entry.1520971529', name);
-                formData.append('entry.281140994', email);
-                formData.append('entry.963635525', address);
-                formData.append('entry.751079573', selectedItems);
-                formData.append('entry.1759210502', totalStr);
+                formData.append('entry.1520971529', document.getElementById('userName').value);
+                formData.append('entry.281140994', document.getElementById('userEmail').value);
+                formData.append('entry.963635525', document.getElementById('shippingAddress').value);
+                formData.append('entry.751079573', itemsList.join(', '));
+                formData.append('entry.1759210502', totalPriceElement.textContent);
 
                 try {
                     await fetch(googleFormUrl, { method: 'POST', mode: 'no-cors', body: formData });
-                    mainContent.classList.add('hidden');
                     document.getElementById('confirmationPage').classList.remove('hidden');
                     setTimeout(() => location.reload(), 5000);
                 } catch (err) {
-                    showMessage('Submission error. Try again.', 'bg-red-100 text-red-800');
+                    showMessage('Error sending order.', 'bg-red-100 text-red-800');
                 }
             });
 
-            function showMessage(msg, cls) {
-                messageBox.textContent = msg;
-                messageBox.className = `mt-4 p-3 rounded-md ${cls}`;
+            function showMessage(m, c) {
+                messageBox.textContent = m;
+                messageBox.className = `mt-4 p-3 rounded ${c}`;
                 messageBox.classList.remove('hidden');
                 setTimeout(() => messageBox.classList.add('hidden'), 5000);
             }

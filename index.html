@@ -24,19 +24,17 @@
 
         body {
             font-family: 'Proxima Nova', sans-serif;
-            background-color: #f7fafc; /* Light gray background */
+            background-color: #f7fafc;
         }
         .container {
             max-width: 1200px;
         }
-        /* Custom scrollbar for the swag list on larger screens */
         @media (min-width: 1024px) {
             .swag-list-container {
                 max-height: calc(100vh - 12rem);
                 overflow-y: auto;
             }
         }
-        /* Style for the floating cart */
         .cart-container {
             position: sticky;
             top: 2rem;
@@ -44,7 +42,6 @@
             overflow-y: auto; 
         }
 
-        /* Custom colors to match Gravity Payments branding */
         .gravity-blue {
             --tw-bg-opacity: 1;
             background-color: #0047a0;
@@ -57,7 +54,7 @@
             color: #0047a0;
         }
         .gravity-green-text {
-            color: #16a34a; /* A more subtle green */
+            color: #16a34a;
         }
     </style>
 </head>
@@ -81,7 +78,7 @@
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
             </svg>
             <h1 class="text-3xl font-bold text-gray-900 mb-2">Order Confirmed!</h1>
-            <p class="text-gray-600 mb-4">Your order has been submitted and a confirmation email is on its way. You can close this window now.</p>
+            <p class="text-gray-600 mb-4">Your order has been submitted and a confirmation email is on its way.</p>
             <p class="text-sm font-semibold text-gray-500">Redirecting in <span id="countdown">5</span> seconds...</p>
         </div>
     </div>
@@ -102,65 +99,53 @@
                     <h1 class="text-4xl font-bold mb-2">Welcome to the Gravity Swag Store!</h1>
                     <p class="text-lg text-gray-600">Select your favorite gear below. Your estimated total will be tracked in the cart.</p>
                 </div>
-                
-                <div id="swagList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    </div>
+                <div id="swagList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
             </div>
 
             <aside class="w-full lg:w-1/3">
                 <form id="orderForm" class="bg-white p-6 rounded-lg shadow-lg cart-container">
                     <h2 class="text-2xl font-bold mb-4 flex items-center space-x-2">
-                        <img src="https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/download.png?raw=true" alt="Simplified Logo" class="h-6 w-6">
+                        <img src="https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/download.png?raw=true" alt="Logo" class="h-6 w-6">
                         <span>Your Cart</span>
                     </h2>
                     
-                    <div id="cartItems" class="space-y-4">
-                        </div>
+                    <div id="cartItems" class="space-y-4"></div>
 
                     <div class="mt-4 border-t border-gray-200 pt-4">
-                        <label for="couponCode" class="block text-sm font-medium text-gray-700">Coupon Code</label>
+                        <label for="couponInput" class="block text-sm font-medium text-gray-700">Coupon Code</label>
                         <div class="flex space-x-2 mt-1">
                             <input type="text" id="couponInput" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2" placeholder="Enter code">
-                            <button type="button" id="applyCouponBtn" class="bg-gray-200 text-gray-800 font-semibold px-4 py-2 rounded-md transition-colors hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                                Apply
-                            </button>
+                            <button type="button" id="applyCouponBtn" class="bg-gray-200 text-gray-800 font-semibold px-4 py-2 rounded-md hover:bg-gray-300">Apply</button>
                         </div>
                         <p id="couponMessage" class="text-sm mt-2 hidden"></p>
                     </div>
+
                     <div class="mt-4 pt-4 border-t border-gray-200">
                         <div class="flex justify-between items-center text-lg font-bold">
                             <span>Total:</span>
-                            <div id="totalPrice" class="text-right gravity-green-text">
-                                $0.00
-                            </div>
+                            <div id="totalPrice" class="text-right gravity-green-text">$0.00</div>
                         </div>
                     </div>
                     
                     <div class="mt-6 space-y-4">
                         <div>
                             <label for="userName" class="block text-sm font-medium text-gray-700">Your Name</label>
-                            <input type="text" id="userName" name="entry.1520971529" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2" placeholder="Enter your full name">
+                            <input type="text" id="userName" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm px-3 py-2" placeholder="Full name">
                         </div>
                         <div>
                             <label for="userEmail" class="block text-sm font-medium text-gray-700">Email Address</label>
-                            <input type="email" id="userEmail" name="entry.281140994" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2" placeholder="Enter your email for confirmation">
+                            <input type="email" id="userEmail" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm px-3 py-2" placeholder="Email for confirmation">
                         </div>
                         <div>
                             <label for="shippingAddress" class="block text-sm font-medium text-gray-700">Shipping Address</label>
-                            <textarea id="shippingAddress" name="entry.963635525" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2" placeholder="Enter your shipping address"></textarea>
+                            <textarea id="shippingAddress" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm px-3 py-2" placeholder="Full shipping address"></textarea>
                         </div>
                     </div>
 
-                    <div class="mt-6">
-                        <p class="text-sm text-gray-500">
-                            An invoice will be sent from accounting.
-                        </p>
-                    </div>
-
-                    <button type="submit" class="mt-6 w-full text-white font-semibold py-3 rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 gravity-blue gravity-blue-hover">
+                    <button type="submit" class="mt-6 w-full text-white font-semibold py-3 rounded-md gravity-blue gravity-blue-hover">
                         Submit Order
                     </button>
-                    <div id="messageBox" class="mt-4 p-3 bg-indigo-100 text-indigo-800 rounded-md hidden"></div>
+                    <div id="messageBox" class="mt-4 p-3 rounded-md hidden"></div>
                 </form>
             </aside>
         </main>
@@ -168,187 +153,71 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- INVENTORY UPDATE BASED ON SCREENSHOT ---
-            // Note: I estimated prices as placeholders. Please update them to match your accounting.
             const inventory = [
-                { 
-                    id: '1', 
-                    name: 'Gravity T-Shirt', 
-                    price: 20.00, 
-                    imageUrl: 'images/gravity-tshirt.jpg', 
-                    description: 'Standard Gravity T-Shirt.', 
-                    sizes: ['S', 'M', 'L', 'XL', '3XL'] 
-                },
-                { 
-                    id: '2', 
-                    name: 'Gravity T-Shirt (New Hire Swag)', 
-                    price: 20.00, 
-                    imageUrl: 'images/gravity-tshirt-new.jpg', 
-                    description: 'New Hire Swag Edition.', 
-                    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL', '4XL'] 
-                },
-                { 
-                    id: '3', 
-                    name: 'Gravity Sweat Shirts - Men', 
-                    price: 40.00, 
-                    imageUrl: 'images/mens-sweatshirt.jpg', 
-                    description: 'Men\'s cut sweatshirt.', 
-                    sizes: ['S', 'M', 'L', 'XL'] 
-                },
-                { 
-                    id: '4', 
-                    name: 'Gravity Sweat Shirts - Women', 
-                    price: 40.00, 
-                    imageUrl: 'images/womens-sweatshirt.jpg', 
-                    description: 'Women\'s cut sweatshirt.', 
-                    sizes: ['S', 'M', 'L', 'XL', '2XL'] 
-                },
-                { 
-                    id: '5', 
-                    name: 'Gravity Branded Hi-liter', 
-                    price: 2.00, 
-                    imageUrl: 'images/hiliter.jpg', 
-                    description: 'Office essential highlighter.' 
-                },
-                { 
-                    id: '6', 
-                    name: 'Gravity Branded full size notebook', 
-                    price: 25.00, 
-                    imageUrl: 'images/full-notebook.jpg', 
-                    description: 'Large branded notebook for your desk.' 
-                },
-                { 
-                    id: '7', 
-                    name: 'Gravity Pens', 
-                    price: .50, 
-                    imageUrl: 'images/pens.jpg', 
-                    description: 'Classic branded ballpoint pen.' 
-                },
-                { 
-                    id: '8', 
-                    name: 'Gravity stainless steel 32 oz waterbottle (new hire)', 
-                    price: 25.00, 
-                    imageUrl: 'images/steel-bottle-new.jpg', 
-                    description: 'Large 32oz water bottle.' 
-                }
+                { id: '1', name: 'Gravity T-Shirt', price: 20.00, imageUrl: 'images/gravity-tshirt.jpg', description: 'Standard Gravity T-Shirt.', sizes: ['S', 'M', 'L', 'XL', '3XL'] },
+                { id: '2', name: 'Gravity T-Shirt (New Hire Swag)', price: 20.00, imageUrl: 'images/gravity-tshirt-new.jpg', description: 'New Hire Swag Edition.', sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL', '4XL'] },
+                { id: '3', name: 'Gravity Sweat Shirts - Men', price: 40.00, imageUrl: 'images/mens-sweatshirt.jpg', description: 'Men\'s cut sweatshirt.', sizes: ['S', 'M', 'L', 'XL'] },
+                { id: '4', name: 'Gravity Sweat Shirts - Women', price: 40.00, imageUrl: 'images/womens-sweatshirt.jpg', description: 'Women\'s cut sweatshirt.', sizes: ['S', 'M', 'L', 'XL', '2XL'] },
+                { id: '5', name: 'Gravity Branded Hi-liter', price: 2.00, imageUrl: 'images/hiliter.jpg', description: 'Office essential highlighter.' },
+                { id: '6', name: 'Gravity Branded full size notebook', price: 25.00, imageUrl: 'images/full-notebook.jpg', description: 'Large branded notebook.' },
+                { id: '7', name: 'Gravity Pens', price: .50, imageUrl: 'images/pens.jpg', description: 'Classic branded ballpoint pen.' },
+                { id: '8', name: 'Gravity stainless steel 32 oz waterbottle (new hire)', price: 25.00, imageUrl: 'images/steel-bottle-new.jpg', description: 'Large 32oz water bottle.' }
             ];
 
-            // --- COUPON CONFIGURATION ---
-            const coupons = {
-                'GRAVITY10': { type: 'fixed', value: 10.00 } // $10.00 OFF
-            };
+            const addonIds = ['5', '7']; // IDs for Hi-liter and Pens
+            const coupons = { 'GRAVITY10': { type: 'fixed', value: 10.00 } };
             let appliedCoupon = null;
-            // ----------------------------
+            let cart = {}; 
 
+            const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSc5jB0nhVWjpjHoViUiEJqX7BBheodhDNge6Pzb12yhTrnG3Q/formResponse';
+            const ACCESS_PASSWORD = 'GravitySwag123';
+
+            const passwordScreen = document.getElementById('password-screen');
+            const passwordInput = document.getElementById('password-input');
+            const passwordSubmitBtn = document.getElementById('password-submit-btn');
+            const mainContent = document.getElementById('mainContent');
             const swagList = document.getElementById('swagList');
             const cartItemsContainer = document.getElementById('cartItems');
             const totalPriceElement = document.getElementById('totalPrice');
             const messageBox = document.getElementById('messageBox');
             const orderForm = document.getElementById('orderForm');
-            const mainContent = document.getElementById('mainContent');
-            const confirmationPage = document.getElementById('confirmationPage');
-            const confirmationCard = document.getElementById('confirmationCard');
 
-            // Coupon Elements
-            const couponInput = document.getElementById('couponInput');
-            const applyCouponBtn = document.getElementById('applyCouponBtn');
-            const couponMessage = document.getElementById('couponMessage');
-
-            let cart = {}; 
-            
-            const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSc5jB0nhVWjpjHoViUiEJqX7BBheodhDNge6Pzb12yhTrnG3Q/formResponse';
-            
-            const ACCESS_PASSWORD = 'GravitySwag123';
-            const passwordScreen = document.getElementById('password-screen');
-            const passwordInput = document.getElementById('password-input');
-            const passwordSubmitBtn = document.getElementById('password-submit-btn');
-            const passwordError = document.getElementById('password-error');
-
+            // Password Protection
             passwordSubmitBtn.addEventListener('click', () => {
                 if (passwordInput.value === ACCESS_PASSWORD) {
                     passwordScreen.classList.add('hidden');
                     mainContent.classList.remove('hidden');
                 } else {
-                    passwordError.classList.remove('hidden');
-                    passwordInput.value = '';
+                    document.getElementById('password-error').classList.remove('hidden');
                 }
             });
-
-            passwordInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    passwordSubmitBtn.click();
-                }
-            });
-
-            // --- COUPON LOGIC ---
-            applyCouponBtn.addEventListener('click', () => {
-                const code = couponInput.value.trim().toUpperCase();
-                
-                // Reset UI
-                couponMessage.classList.add('hidden');
-                couponMessage.className = 'text-sm mt-2 hidden'; 
-
-                if (!code) return;
-
-                if (coupons[code]) {
-                    appliedCoupon = { code: code, ...coupons[code] };
-                    couponMessage.textContent = `Coupon "${code}" applied!`;
-                    couponMessage.classList.remove('hidden');
-                    couponMessage.classList.add('text-green-600');
-                    updateCart(); 
-                } else {
-                    appliedCoupon = null;
-                    couponMessage.textContent = 'Invalid coupon code.';
-                    couponMessage.classList.remove('hidden');
-                    couponMessage.classList.add('text-red-500');
-                    updateCart(); 
-                }
-            });
-            // --------------------
 
             function renderSwagList() {
                 swagList.innerHTML = '';
                 inventory.forEach(item => {
                     const hasSizes = item.sizes && item.sizes.length > 0;
                     const card = document.createElement('div');
-                    card.className = 'bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-200 hover:scale-105';
-                    
-                    let sizeSelectorHtml = '';
-                    if (hasSizes) {
-                        sizeSelectorHtml = `
-                            <div class="mt-2 text-center">
-                                <label for="size-${item.id}" class="text-sm font-medium text-gray-700">Size</label>
-                                <select id="size-${item.id}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                                    ${item.sizes.map(size => `<option value="${size}">${size}</option>`).join('')}
-                                </select>
-                            </div>
-                        `;
-                    }
-
+                    card.className = 'bg-white rounded-lg shadow-lg overflow-hidden transition-transform hover:scale-105';
                     card.innerHTML = `
-                        <img src="${item.imageUrl}" alt="${item.name}" class="w-full h-48 object-cover">
+                        <img src="${item.imageUrl}" class="w-full h-48 object-cover">
                         <div class="p-4">
-                            <h3 class="text-xl font-bold text-gray-900">${item.name}</h3>
-                            <p class="text-sm text-gray-500 mt-1">${item.description}</p>
-                            ${sizeSelectorHtml}
+                            <h3 class="text-xl font-bold">${item.name}</h3>
+                            <p class="text-sm text-gray-500">${item.description}</p>
+                            ${hasSizes ? `
+                                <div class="mt-2">
+                                    <select id="size-${item.id}" class="w-full rounded-md border-gray-300 text-sm">
+                                        ${item.sizes.map(s => `<option value="${s}">${s}</option>`).join('')}
+                                    </select>
+                                </div>` : ''}
                             <div class="mt-4 flex justify-between items-center">
                                 <span class="text-xl font-bold gravity-green-text">$${item.price.toFixed(2)}</span>
                                 <div class="flex items-center space-x-2">
-                                    <button data-id="${item.id}" data-has-sizes="${hasSizes}" class="remove-from-cart-btn bg-gray-200 text-gray-600 p-1 rounded-md transition-colors duration-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
-                                        </svg>
-                                    </button>
-                                    <span id="quantity-${item.id}" class="text-lg font-semibold">0</span>
-                                    <button data-id="${item.id}" data-has-sizes="${hasSizes}" class="add-to-cart-btn gravity-blue text-white p-1 rounded-md transition-colors duration-200 hover:gravity-blue-hover">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                                        </svg>
-                                    </button>
+                                    <button data-id="${item.id}" data-has-sizes="${hasSizes}" class="remove-from-cart-btn bg-gray-200 p-1 rounded-md">-</button>
+                                    <span id="quantity-${item.id}" class="font-semibold">0</span>
+                                    <button data-id="${item.id}" data-has-sizes="${hasSizes}" class="add-to-cart-btn gravity-blue text-white p-1 rounded-md">+</button>
                                 </div>
                             </div>
-                        </div>
-                    `;
+                        </div>`;
                     swagList.appendChild(card);
                 });
             }
@@ -358,205 +227,105 @@
                 let subtotal = 0;
                 let cartIsEmpty = true;
 
-                // 1. Calculate Items Subtotal
-                for (const itemKey in cart) {
-                    if (cart[itemKey] > 0) {
+                for (const key in cart) {
+                    if (cart[key] > 0) {
                         cartIsEmpty = false;
-                        const [itemId, size] = itemKey.split('_');
-                        const item = inventory.find(i => i.id === itemId);
-                        if (item) {
-                            const itemTotal = item.price * cart[itemKey];
-                            subtotal += itemTotal;
+                        const [id, size] = key.split('_');
+                        const item = inventory.find(i => i.id === id);
+                        const lineTotal = item.price * cart[key];
+                        subtotal += lineTotal;
 
-                            const cartItem = document.createElement('div');
-                            cartItem.className = 'flex items-center justify-between';
-                            cartItem.innerHTML = `
-                                <span class="text-gray-900">${item.name}${size ? ' (' + size + ')' : ''} (${cart[itemKey]})</span>
-                                <span class="font-semibold text-gray-900">$${itemTotal.toFixed(2)}</span>
-                            `;
-                            cartItemsContainer.appendChild(cartItem);
-                        }
+                        const div = document.createElement('div');
+                        div.className = 'flex justify-between text-sm';
+                        div.innerHTML = `<span>${item.name}${size ? ' ('+size+')' : ''} x${cart[key]}</span><span>$${lineTotal.toFixed(2)}</span>`;
+                        cartItemsContainer.appendChild(div);
                     }
-                }
-
-                if (cartIsEmpty) {
-                    cartItemsContainer.innerHTML = '<p class="text-center text-gray-500">Your cart is empty.</p>';
-                    // Reset coupon if cart is emptied
-                    appliedCoupon = null; 
-                    couponInput.value = '';
-                    couponMessage.classList.add('hidden');
-                }
-
-                // 2. Calculate Discount
-                let discountAmount = 0;
-                if (appliedCoupon && subtotal > 0) {
-                    if (appliedCoupon.type === 'percent') {
-                        discountAmount = subtotal * appliedCoupon.value;
-                    } else if (appliedCoupon.type === 'fixed') {
-                        discountAmount = appliedCoupon.value;
-                    }
-                    if (discountAmount > subtotal) discountAmount = subtotal;
-                }
-
-                const finalTotal = subtotal - discountAmount;
-
-                // 3. Update Display
-                if (discountAmount > 0) {
-                    totalPriceElement.innerHTML = `
-                        <span class="text-gray-500 text-sm line-through block">$${subtotal.toFixed(2)}</span>
-                        <span class="text-green-600 block">-$${discountAmount.toFixed(2)}</span>
-                        <span>$${finalTotal.toFixed(2)}</span>
-                    `;
-                } else {
-                    totalPriceElement.textContent = `$${finalTotal.toFixed(2)}`;
                 }
                 
-                // Store final total text for submission
+                let discount = (appliedCoupon && subtotal > 0) ? Math.min(subtotal, appliedCoupon.value) : 0;
+                let finalTotal = subtotal - discount;
+                totalPriceElement.textContent = `$${finalTotal.toFixed(2)}`;
                 totalPriceElement.dataset.cleanValue = `$${finalTotal.toFixed(2)}`;
+                if (cartIsEmpty) cartItemsContainer.innerHTML = '<p class="text-center text-gray-500">Cart is empty.</p>';
             }
 
             swagList.addEventListener('click', (e) => {
-                const addButton = e.target.closest('.add-to-cart-btn');
-                const removeButton = e.target.closest('.remove-from-cart-btn');
+                const addBtn = e.target.closest('.add-to-cart-btn');
+                const remBtn = e.target.closest('.remove-from-cart-btn');
+                if (!addBtn && !remBtn) return;
 
-                if (addButton) {
-                    const itemId = addButton.dataset.id;
-                    const hasSizes = addButton.dataset.hasSizes === 'true';
-                    let size = '';
-                    if (hasSizes) {
-                        size = document.getElementById(`size-${itemId}`).value;
-                    }
-                    const itemKey = `${itemId}_${size}`;
-                    cart[itemKey] = (cart[itemKey] || 0) + 1;
-                } else if (removeButton) {
-                    const itemId = removeButton.dataset.id;
-                    const hasSizes = removeButton.dataset.hasSizes === 'true';
-                    let size = '';
-                    if (hasSizes) {
-                        size = document.getElementById(`size-${itemId}`).value;
-                    }
-                    const itemKey = `${itemId}_${size}`;
-                    if (cart[itemKey] && cart[itemKey] > 0) {
-                        cart[itemKey]--;
-                    }
-                }
+                const btn = addBtn || remBtn;
+                const id = btn.dataset.id;
+                const size = btn.dataset.hasSizes === 'true' ? document.getElementById(`size-${id}`).value : '';
+                const key = `${id}_${size}`;
 
-                // Update quantities on cards
-                if (addButton || removeButton) {
-                     const buttonElement = addButton || removeButton;
-                     const itemId = buttonElement.dataset.id;
-                     const quantitySpan = document.getElementById(`quantity-${itemId}`);
-                     
-                     if (quantitySpan) {
-                        let totalQuantity = 0;
-                        for (const key in cart) {
-                            if (key.startsWith(itemId + '_')) {
-                                totalQuantity += cart[key];
-                            }
-                        }
-                        quantitySpan.textContent = totalQuantity;
-                     }
-                }
+                if (addBtn) cart[key] = (cart[key] || 0) + 1;
+                else if (remBtn && cart[key] > 0) cart[key]--;
 
+                let totalQty = 0;
+                for (const k in cart) if (k.startsWith(id + '_')) totalQty += cart[k];
+                document.getElementById(`quantity-${id}`).textContent = totalQty;
                 updateCart();
             });
 
             orderForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
-                const userName = document.getElementById('userName').value.trim();
-                const userEmail = document.getElementById('userEmail').value.trim();
-                const shippingAddress = document.getElementById('shippingAddress').value.trim();
-                
-                if (!userName || !shippingAddress || !userEmail) {
-                    showMessage('Please fill in your name, email, and shipping address.', 'bg-red-100 text-red-800');
+                const name = document.getElementById('userName').value.trim();
+                const email = document.getElementById('userEmail').value.trim();
+                const address = document.getElementById('shippingAddress').value.trim();
+
+                if (!name || !email || !address) {
+                    showMessage('Missing contact or shipping info.', 'bg-red-100 text-red-800');
                     return;
                 }
+
+                let hasMainItem = false;
+                let hasAddonItem = false;
                 
                 const selectedItems = Object.entries(cart)
-                    .filter(([itemKey, quantity]) => quantity > 0)
-                    .map(([itemKey, quantity]) => {
-                        const [itemId, size] = itemKey.split('_');
-                        const item = inventory.find(i => i.id === itemId);
-                        if (item) {
-                            return `${quantity}x ${item.name}${size ? ' (' + size + ')' : ''}`;
-                        }
-                        return '';
-                    }).filter(Boolean).join(', ');
-                
-                if (!selectedItems) {
-                    showMessage('Your cart is empty. Please add items.', 'bg-red-100 text-red-800');
+                    .filter(([_, qty]) => qty > 0)
+                    .map(([key, qty]) => {
+                        const [id, size] = key.split('_');
+                        const item = inventory.find(i => i.id === id);
+                        if (addonIds.includes(id)) hasAddonItem = true;
+                        else hasMainItem = true;
+                        return `${qty}x ${item.name}${size ? ' ('+size+')' : ''}`;
+                    }).join(', ');
+
+                // ADD-ON VALIDATION LOGIC
+                if (hasAddonItem && !hasMainItem) {
+                    showMessage('Highlighters and pens can only be ordered as add-ons to larger items.', 'bg-red-100 text-red-800');
                     return;
                 }
-                
-                // Prepare final total string
-                let totalToSend = totalPriceElement.dataset.cleanValue || totalPriceElement.textContent;
-                
-                // Append Coupon Info if applicable so accounting sees it
-                if (appliedCoupon) {
-                    totalToSend += ` (Code: ${appliedCoupon.code})`;
+
+                if (!selectedItems) {
+                    showMessage('Cart is empty.', 'bg-red-100 text-red-800');
+                    return;
                 }
 
+                let totalStr = totalPriceElement.dataset.cleanValue + (appliedCoupon ? ` (Code: ${appliedCoupon.code})` : '');
                 const formData = new FormData();
-                formData.append('entry.1520971529', userName);
-                formData.append('entry.281140994', userEmail);
-                formData.append('entry.963635525', shippingAddress);
+                formData.append('entry.1520971529', name);
+                formData.append('entry.281140994', email);
+                formData.append('entry.963635525', address);
                 formData.append('entry.751079573', selectedItems);
-                formData.append('entry.1759210502', totalToSend);
-                
+                formData.append('entry.1759210502', totalStr);
+
                 try {
-                    const response = await fetch(googleFormUrl, {
-                        method: 'POST',
-                        mode: 'no-cors',
-                        body: formData
-                    });
-                    
-                    showConfirmationPage();
-
-                    cart = {};
-                    appliedCoupon = null; // Reset coupon
-                    couponInput.value = ''; // Clear input
-                    couponMessage.classList.add('hidden');
-                    
-                    orderForm.reset();
-                    renderSwagList();
-                    updateCart();
-                    
-                    // Reset card quantities visually
-                    document.querySelectorAll('[id^="quantity-"]').forEach(el => el.textContent = '0');
-
-                } catch (error) {
-                    console.error('Submission error:', error);
-                    showMessage('There was an error submitting your order. Please try again.', 'bg-red-100 text-red-800');
+                    await fetch(googleFormUrl, { method: 'POST', mode: 'no-cors', body: formData });
+                    mainContent.classList.add('hidden');
+                    document.getElementById('confirmationPage').classList.remove('hidden');
+                    setTimeout(() => location.reload(), 5000);
+                } catch (err) {
+                    showMessage('Submission error. Try again.', 'bg-red-100 text-red-800');
                 }
             });
 
-            function showMessage(message, className) {
-                messageBox.textContent = message;
-                messageBox.className = `mt-4 p-3 rounded-md ${className}`;
-                messageBox.style.display = 'block';
-                setTimeout(() => {
-                    messageBox.style.display = 'none';
-                }, 5000);
-            }
-
-            function showConfirmationPage() {
-                mainContent.classList.add('hidden');
-                confirmationPage.classList.remove('hidden');
-                setTimeout(() => {
-                    confirmationCard.classList.remove('scale-95', 'opacity-0');
-                    confirmationCard.classList.add('scale-100', 'opacity-100');
-                }, 100);
-
-                let countdown = 5;
-                const countdownElement = document.getElementById('countdown');
-                const interval = setInterval(() => {
-                    countdown--;
-                    countdownElement.textContent = countdown;
-                    if (countdown === 0) {
-                        clearInterval(interval);
-                        location.reload(); 
-                    }
-                }, 1000);
+            function showMessage(msg, cls) {
+                messageBox.textContent = msg;
+                messageBox.className = `mt-4 p-3 rounded-md ${cls}`;
+                messageBox.classList.remove('hidden');
+                setTimeout(() => messageBox.classList.add('hidden'), 5000);
             }
 
             renderSwagList();
@@ -564,5 +333,4 @@
         });
     </script>
 </body>
-</html>
 </html>

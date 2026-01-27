@@ -116,17 +116,16 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const inventory = [
-                { id: '1', name: 'Gravity T-Shirt', price: 20.00, imageUrl: 'images/gravity-tshirt.jpg', description: 'Standard T-Shirt', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'] },
-                { id: '2', name: 'Gravity T-Shirt (New Hire Swag)', price: 20.00, imageUrl: 'images/gravity-tshirt-new.jpg', description: 'New Hire Edition', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL', '4XL'] },
-                { id: '3', name: 'Gravity Sweat Shirts - Men', price: 40.00, imageUrl: 'images/mens-sweatshirt.jpg', description: 'Men\'s cut', sizes: ['S', 'M', 'L', 'XL', '2XL'] },
-                { id: '4', name: 'Gravity Sweat Shirts - Women', price: 40.00, imageUrl: 'images/womens-sweatshirt.jpg', description: 'Women\'s cut', sizes: ['S', 'M', 'L', 'XL', '2XL'] },
-                { id: '5', name: 'Gravity Branded Hi-liter', price: 2.00, imageUrl: 'images/hiliter.jpg', description: 'Office essential', isAddon: true },
-                { id: '6', name: 'Gravity Branded Notebook', price: 25.00, imageUrl: 'images/full-notebook.jpg', description: 'Large notebook' },
-                { id: '7', name: 'Gravity Pens', price: .50, imageUrl: 'images/pens.jpg', description: 'Ballpoint pen', isAddon: true },
-                { id: '8', name: 'Gravity Waterbottle', price: 25.00, imageUrl: 'images/steel-bottle-new.jpg', description: '32oz Steel Bottle' }
-            ];
-
+          const inventory = [
+    { id: '1', name: 'Gravity T-Shirt', price: 20.00, imageUrl: 'https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/gravity-tshirt.jpg?raw=true', description: 'Standard T-Shirt', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'] },
+    { id: '2', name: 'Gravity T-Shirt (New Hire Swag)', price: 20.00, imageUrl: 'https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/gravity-tshirt-new.jpg?raw=true', description: 'New Hire Edition', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL', '4XL'] },
+    { id: '3', name: 'Gravity Sweat Shirts - Men', price: 40.00, imageUrl: 'https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/mens-sweatshirt.jpg?raw=true', description: 'Men\'s cut', sizes: ['S', 'M', 'L', 'XL', '2XL'] },
+    { id: '4', name: 'Gravity Sweat Shirts - Women', price: 40.00, imageUrl: 'https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/womens-sweatshirt.jpg?raw=true', description: 'Women\'s cut', sizes: ['S', 'M', 'L', 'XL', '2XL'] },
+    { id: '5', name: 'Gravity Branded Hi-liter', price: 2.00, imageUrl: 'https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/hiliter.jpg?raw=true', description: 'Office essential', isAddon: true },
+    { id: '6', name: 'Gravity Branded Notebook', price: 25.00, imageUrl: 'https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/full-notebook.jpg?raw=true', description: 'Large notebook' },
+    { id: '7', name: 'Gravity Pens', price: .50, imageUrl: 'https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/pens.jpg?raw=true', description: 'Ballpoint pen', isAddon: true },
+    { id: '8', name: 'Gravity Waterbottle', price: 25.00, imageUrl: 'https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/steel-bottle-new.jpg?raw=true', description: '32oz Steel Bottle' }
+];
             const addonIds = ['5', '7']; 
             let cart = {}; 
             const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSc5jB0nhVWjpjHoViUiEJqX7BBheodhDNge6Pzb12yhTrnG3Q/formResponse';

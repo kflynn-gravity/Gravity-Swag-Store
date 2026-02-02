@@ -40,17 +40,21 @@
 
             <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6 text-sm text-gray-700 space-y-3">
                 <p class="font-semibold text-blue-800 text-base">About the Store</p>
-               <p>Our goal is to provide high-quality Gravity gear at the best possible value. To keep the process simple, our pricing is all-inclusive—covering the base cost of the item plus shipping and fulfillment. This allows us to offer these items to you without a profit markup.</p>
+                <p>Our goal is to provide high-quality Gravity gear at the best possible value. To keep the process simple, our pricing is all-inclusive.</p>
                 
+                <div class="bg-yellow-100 border border-yellow-200 p-3 rounded-md text-yellow-800 font-medium">
+                    ✨ Use code <strong>GRAVITY10</strong> at checkout for $10 off your order!
+                </div>
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2 mt-2">
                     <ul class="list-disc ml-5 space-y-1">
                         <li><strong>All sales are final.</strong></li>
                         <li>Items are subject to availability.</li>
-                        <li>Shipping takes 3–5 business days after payment.</li>
+                        <li>Shipping takes 3–5 business days.</li>
                     </ul>
                     <ul class="list-disc ml-5 space-y-1">
-                        <li>Payment links are sent by Accounting.</li>
-                        <li>Orders ship once payment is received.</li>
+                        <li>Payment links sent by Accounting.</li>
+                        <li>Orders ship once paid.</li>
                         <li>Reach out to <strong>TA</strong> for support.</li>
                     </ul>
                 </div>
@@ -67,13 +71,6 @@
         </div>
     </div>
 
-    <div id="confirmationPage" class="fixed inset-0 bg-gray-50 flex items-center justify-center p-6 z-50 hidden">
-        <div class="bg-white p-8 rounded-lg shadow-2xl max-w-xl text-center">
-            <h1 class="text-3xl font-bold text-gray-900 mb-2">Order Submitted!</h1>
-            <p class="text-gray-600">Check your email for a payment link from Accounting soon. Redirecting in <span id="countdown">5</span> seconds...</p>
-        </div>
-    </div>
-    
     <div id="mainContent" class="hidden">
         <header class="bg-white shadow-sm sticky top-0 z-50">
             <div class="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -92,10 +89,25 @@
             <aside class="w-full lg:w-1/3">
                 <form id="orderForm" class="bg-white p-6 rounded-lg shadow-lg cart-container">
                     <h2 class="text-2xl font-bold mb-4">Your Cart</h2>
-                    <div id="cartItems" class="space-y-4 mb-4"></div>
+                    <div id="cartItems" class="space-y-4 mb-4 border-b pb-4"></div>
                     
-                    <div class="border-t pt-4">
-                        <div class="flex justify-between items-center text-lg font-bold">
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center text-sm">
+                            <span>Subtotal:</span>
+                            <span id="subtotalPrice">$0.00</span>
+                        </div>
+                        
+                        <div class="flex gap-2 py-2">
+                            <input type="text" id="promoCode" class="flex-1 border rounded px-3 py-1 text-sm uppercase" placeholder="GRAVITY10">
+                            <button type="button" id="applyPromo" class="bg-gray-200 px-3 py-1 rounded text-sm font-semibold hover:bg-gray-300">Apply</button>
+                        </div>
+
+                        <div id="discountDisplay" class="hidden justify-between items-center text-sm font-bold text-red-600">
+                            <span>Discount:</span>
+                            <span id="discountAmount">-$0.00</span>
+                        </div>
+
+                        <div class="flex justify-between items-center text-xl font-bold border-t pt-2">
                             <span>Total:</span>
                             <div id="totalPrice" class="gravity-green-text">$0.00</div>
                         </div>
@@ -116,37 +128,54 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-          const inventory = [
-    { id: '1', name: 'Gravity T-Shirt', price: 20.00, imageUrl: 'https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/gravity-tshirt.jpg?raw=true', description: 'Standard T-Shirt', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'] },
-    { id: '2', name: 'Gravity T-Shirt (New Hire Swag)', price: 20.00, imageUrl: 'https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/gravity-tshirt-new.jpg?raw=true', description: 'New Hire Edition', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL', '4XL'] },
-    { id: '3', name: 'Gravity Sweat Shirts - Men', price: 40.00, imageUrl: 'https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/mens-sweatshirt.jpg?raw=true', description: 'Men\'s cut', sizes: ['S', 'M', 'L', 'XL', '2XL'] },
-    { id: '4', name: 'Gravity Sweat Shirts - Women', price: 40.00, imageUrl: 'https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/womens-sweatshirt.jpg?raw=true', description: 'Women\'s cut', sizes: ['S', 'M', 'L', 'XL', '2XL'] },
-    { id: '5', name: 'Gravity Branded Hi-liter', price: 2.00, imageUrl: 'https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/hiliter.jpg?raw=true', description: 'Office essential', isAddon: true },
-    { id: '6', name: 'Gravity Branded Notebook', price: 25.00, imageUrl: 'https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/full-notebook.jpg?raw=true', description: 'Large notebook' },
-    { id: '7', name: 'Gravity Pens', price: .50, imageUrl: 'https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/pens.jpg?raw=true', description: 'Ballpoint pen', isAddon: true },
-    { id: '8', name: 'Gravity Waterbottle', price: 25.00, imageUrl: 'https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/steel-bottle-new.jpg?raw=true', description: '32oz Steel Bottle' }
-];
+            const inventory = [
+                { id: '1', name: 'Gravity T-Shirt', price: 20.00, imageUrl: 'https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/gravity-tshirt.jpg?raw=true', description: 'Standard T-Shirt', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'] },
+                { id: '2', name: 'Gravity T-Shirt (New Hire Swag)', price: 20.00, imageUrl: 'https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/gravity-tshirt-new.jpg?raw=true', description: 'New Hire Edition', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL', '4XL'] },
+                { id: '3', name: 'Gravity Sweat Shirts - Men', price: 40.00, imageUrl: 'https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/mens-sweatshirt.jpg?raw=true', description: 'Men\'s cut', sizes: ['S', 'M', 'L', 'XL', '2XL'] },
+                { id: '4', name: 'Gravity Sweat Shirts - Women', price: 40.00, imageUrl: 'https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/womens-sweatshirt.jpg?raw=true', description: 'Women\'s cut', sizes: ['S', 'M', 'L', 'XL', '2XL'] },
+                { id: '5', name: 'Gravity Branded Hi-liter', price: 2.00, imageUrl: 'https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/hiliter.jpg?raw=true', description: 'Office essential', isAddon: true },
+                { id: '6', name: 'Gravity Branded Notebook', price: 25.00, imageUrl: 'https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/full-notebook.jpg?raw=true', description: 'Large notebook' },
+                { id: '7', name: 'Gravity Pens', price: .50, imageUrl: 'https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/pens.jpg?raw=true', description: 'Ballpoint pen', isAddon: true },
+                { id: '8', name: 'Gravity Waterbottle', price: 25.00, imageUrl: 'https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/steel-bottle-new.jpg?raw=true', description: '32oz Steel Bottle' }
+            ];
+
             const addonIds = ['5', '7']; 
             let cart = {}; 
-            const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSc5jB0nhVWjpjHoViUiEJqX7BBheodhDNge6Pzb12yhTrnG3Q/formResponse';
+            let discount = 0;
             const ACCESS_PASSWORD = 'GravitySwag123';
 
-            const passwordSubmitBtn = document.getElementById('password-submit-btn');
-            const passwordInput = document.getElementById('password-input');
-            const mainContent = document.getElementById('mainContent');
+            const promoBtn = document.getElementById('applyPromo');
+            const promoInput = document.getElementById('promoCode');
+            const discountDisplay = document.getElementById('discountDisplay');
+            const discountAmount = document.getElementById('discountAmount');
+            const subtotalPriceElement = document.getElementById('subtotalPrice');
+            const totalPriceElement = document.getElementById('totalPrice');
             const swagList = document.getElementById('swagList');
             const cartItemsContainer = document.getElementById('cartItems');
-            const totalPriceElement = document.getElementById('totalPrice');
-            const messageBox = document.getElementById('messageBox');
-            const orderForm = document.getElementById('orderForm');
 
-            passwordSubmitBtn.addEventListener('click', () => {
-                if (passwordInput.value === ACCESS_PASSWORD) {
+            // Password Check
+            document.getElementById('password-submit-btn').addEventListener('click', () => {
+                if (document.getElementById('password-input').value === ACCESS_PASSWORD) {
                     document.getElementById('password-screen').classList.add('hidden');
-                    mainContent.classList.remove('hidden');
+                    document.getElementById('mainContent').classList.remove('hidden');
                 } else {
                     document.getElementById('password-error').classList.remove('hidden');
                 }
+            });
+
+            // Promo Logic
+            promoBtn.addEventListener('click', () => {
+                if (promoInput.value.toUpperCase() === 'GRAVITY10') {
+                    discount = 10;
+                    discountDisplay.classList.remove('hidden');
+                    discountDisplay.classList.add('flex');
+                    alert('Promo code applied: $10 off!');
+                } else {
+                    alert('Invalid code');
+                    discount = 0;
+                    discountDisplay.classList.add('hidden');
+                }
+                updateCart();
             });
 
             function renderSwagList() {
@@ -181,21 +210,29 @@
 
             function updateCart() {
                 cartItemsContainer.innerHTML = '';
-                let total = 0;
+                let subtotal = 0;
                 let empty = true;
                 for (const key in cart) {
                     if (cart[key] > 0) {
                         empty = false;
                         const [id] = key.split('_');
                         const item = inventory.find(i => i.id === id);
-                        total += item.price * cart[key];
+                        subtotal += item.price * cart[key];
                         const div = document.createElement('div');
                         div.className = 'flex justify-between text-sm';
                         div.innerHTML = `<span>${item.name} x${cart[key]}</span><span>$${(item.price * cart[key]).toFixed(2)}</span>`;
                         cartItemsContainer.appendChild(div);
                     }
                 }
-                totalPriceElement.textContent = `$${total.toFixed(2)}`;
+
+                // Apply flat $10 discount but don't go below $0
+                let currentDiscount = (subtotal > 0) ? Math.min(subtotal, discount) : 0;
+                let finalTotal = subtotal - currentDiscount;
+
+                subtotalPriceElement.textContent = `$${subtotal.toFixed(2)}`;
+                discountAmount.textContent = `-$${currentDiscount.toFixed(2)}`;
+                totalPriceElement.textContent = `$${finalTotal.toFixed(2)}`;
+                
                 if (empty) cartItemsContainer.innerHTML = '<p class="text-gray-400 text-center">Empty</p>';
             }
 
@@ -215,60 +252,6 @@
                 document.getElementById(`qty-${id}`).textContent = q;
                 updateCart();
             });
-
-            orderForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                let hasMainItem = false;
-                let hasAddonOnly = false;
-                let itemsList = [];
-
-                for (let key in cart) {
-                    if (cart[key] > 0) {
-                        const [id, size] = key.split('_');
-                        const item = inventory.find(i => i.id === id);
-                        if (addonIds.includes(id)) hasAddonOnly = true;
-                        else hasMainItem = true;
-                        itemsList.push(`${cart[key]}x ${item.name}${size ? ' ('+size+')' : ''}`);
-                    }
-                }
-
-                if (hasAddonOnly && !hasMainItem) {
-                    showMessage('Highlighters and pens are add-on only. Please add a shirt, notebook, or bottle.', 'bg-red-100 text-red-800');
-                    return;
-                }
-
-                if (itemsList.length === 0) {
-                    showMessage('Your cart is empty.', 'bg-red-100 text-red-800');
-                    return;
-                }
-
-                const formData = new FormData();
-                formData.append('entry.1520971529', document.getElementById('userName').value);
-                formData.append('entry.281140994', document.getElementById('userEmail').value);
-                formData.append('entry.963635525', document.getElementById('shippingAddress').value);
-                formData.append('entry.751079573', itemsList.join(', '));
-                formData.append('entry.1759210502', totalPriceElement.textContent);
-
-                try {
-                    await fetch(googleFormUrl, { method: 'POST', mode: 'no-cors', body: formData });
-                    document.getElementById('confirmationPage').classList.remove('hidden');
-                    let count = 5;
-                    setInterval(() => {
-                        count--;
-                        document.getElementById('countdown').textContent = count;
-                        if(count <= 0) location.reload();
-                    }, 1000);
-                } catch (err) {
-                    showMessage('Error sending order.', 'bg-red-100 text-red-800');
-                }
-            });
-
-            function showMessage(m, c) {
-                messageBox.textContent = m;
-                messageBox.className = `mt-4 p-3 rounded ${c}`;
-                messageBox.classList.remove('hidden');
-                setTimeout(() => messageBox.classList.add('hidden'), 5000);
-            }
 
             renderSwagList();
             updateCart();

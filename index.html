@@ -42,7 +42,7 @@
                 <p class="font-semibold text-blue-800 text-base">About the Store</p>
                 <p>Our goal is to provide high-quality Gravity gear at the best possible value. To keep the process simple, our pricing is <strong>all-inclusive</strong>—covering the base cost of the item plus shipping and fulfillment. This allows us to offer these items to you without a profit markup.</p>
                 
-                <div class="bg-yellow-100 border border-yellow-200 p-3 rounded-md text-yellow-800 font-medium">
+                <div class="bg-yellow-100 border border-yellow-200 p-3 rounded-md text-yellow-800 font-medium text-center">
                     ✨ Use code <strong>GRAVITY10</strong> at checkout for $10 off your order!
                 </div>
 
@@ -71,10 +71,11 @@
         </div>
     </div>
 
-    <div id="confirmationPage" class="fixed inset-0 bg-gray-50 flex items-center justify-center p-6 z-50 hidden">
-        <div class="bg-white p-8 rounded-lg shadow-2xl max-w-xl text-center">
+    <div id="confirmationPage" class="fixed inset-0 bg-gray-50 flex items-center justify-center p-6 z-50 hidden text-center">
+        <div class="bg-white p-8 rounded-lg shadow-2xl max-w-xl">
             <h1 class="text-3xl font-bold text-gray-900 mb-2">Order Submitted!</h1>
-            <p class="text-gray-600">Check your email for a payment link from Accounting soon. Redirecting in <span id="countdown">5</span> seconds...</p>
+            <p class="text-gray-600 mb-4">Check your email for a payment link from Accounting soon. Your gear will ship 3-5 days after payment is confirmed.</p>
+            <p class="text-sm font-semibold text-gray-500">Redirecting in <span id="countdown">5</span> seconds...</p>
         </div>
     </div>
 
@@ -258,8 +259,8 @@
                 
                 let q = 0;
                 for (let k in cart) if (k.startsWith(id + '_')) q += cart[k];
-                const qtyDisplay = document.getElementById(`qty-${id}`);
-                if (qtyDisplay) qtyDisplay.textContent = q;
+                const qtySpan = document.getElementById(`qty-${id}`);
+                if (qtySpan) qtySpan.textContent = q;
                 updateCart();
             });
 
@@ -283,8 +284,9 @@
                     }
                 }
 
+                // Add-on only restriction logic
                 if (hasAddonItem && !hasMainItem) {
-                    showMessage('Hi-liters and pens are add-on only. Please add a shirt, sweatshirt, or bottle to your cart.', 'bg-red-100 text-red-800');
+                    showMessage('Hi-liters and pens are add-on only. Please add a larger item (shirt, sweatshirt, or bottle) to checkout.', 'bg-red-100 text-red-800');
                     return;
                 }
 
@@ -304,11 +306,11 @@
                     await fetch(googleFormUrl, { method: 'POST', mode: 'no-cors', body: formData });
                     document.getElementById('confirmationPage').classList.remove('hidden');
                     let count = 5;
-                    const countdown = setInterval(() => {
+                    const interval = setInterval(() => {
                         count--;
                         document.getElementById('countdown').textContent = count;
                         if(count <= 0) {
-                            clearInterval(countdown);
+                            clearInterval(interval);
                             location.reload();
                         }
                     }, 1000);

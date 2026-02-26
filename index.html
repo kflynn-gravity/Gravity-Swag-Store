@@ -50,7 +50,7 @@
     <div id="password-screen" class="fixed inset-0 bg-gray-100 flex items-center justify-center z-50 p-4 overflow-y-auto">
         <div class="bg-white p-8 rounded-lg shadow-xl max-w-2xl w-full my-auto">
             <div class="text-center mb-6">
-                <img src="https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/download.png?raw=true" alt="Gravity Logo" class="h-12 w-12 mx-auto mb-4">
+                <img src="images/download.png" alt="Gravity Logo" class="h-12 w-12 mx-auto mb-4">
                 <h2 class="text-3xl font-bold text-gray-900">Gravity Swag Store</h2>
             </div>
 
@@ -96,7 +96,7 @@
         <header class="bg-white shadow-sm sticky top-0 z-50">
             <div class="container mx-auto px-6 py-4 flex justify-between items-center">
                 <div class="text-2xl font-bold text-gray-900 flex items-center space-x-2">
-                    <img src="https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/download.png?raw=true" alt="Logo" class="h-8 w-8">
+                    <img src="images/download.png" alt="Logo" class="h-8 w-8">
                     <span>Gravity Swag Store</span>
                 </div>
             </div>
@@ -149,7 +149,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-          const inventory = [
+            const inventory = [
                 { id: '1', name: 'Gravity T-Shirt', price: 20.00, images: ['images/gravity-tshirt-new-front.png', 'images/gravity-tshirt-new-back.png'], description: 'Standard T-Shirt', fullDescription: 'A premium cotton-blend shirt with a tagless design for ultimate comfort. Features the classic Gravity logo on the front and a vibrant Boise, Idaho skyline graphic on the back.', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'] },
                 { id: '2', name: 'Gravity T-Shirt (New Hire)', price: 20.00, images: ['images/gravity-tshirt-new-front.png', 'images/gravity-tshirt-new-back.png'], description: 'New Hire Edition', fullDescription: 'Special edition shirt for our newest team members. Same great quality.', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'] },
                 { id: '3', name: 'Gravity Sweatshirt - Men', price: 40.00, images: ['images/mens-sweatshirt-front.png', 'images/mens-sweatshirt-back.png'], description: 'Men\'s cut', fullDescription: 'Heavyweight fleece-lined sweatshirt designed for warmth and durability.', sizes: ['S', 'M', 'L', 'XL', '2XL'] },
@@ -159,6 +159,7 @@
                 { id: '7', name: 'Gravity Pens', price: 0.50, images: ['images/pens-front.png', 'images/pens-detail.png'], description: 'Ballpoint pen', fullDescription: 'Smooth writing black ink ballpoint pen with a comfortable grip.', isAddon: true },
                 { id: '8', name: 'Gravity Waterbottle', price: 25.00, images: ['images/steel-bottle-front.png', 'images/steel-bottle-detail.png'], description: '32oz Steel Bottle', fullDescription: 'Double-walled vacuum insulated stainless steel. Keeps drinks cold for 24 hours.' }
             ];
+
             const addonIds = ['5', '7']; 
             let cart = {}; 
             let discountValue = 0;

@@ -27,6 +27,22 @@
         .gravity-blue { background-color: #0047a0; }
         .gravity-blue-hover:hover { background-color: #003d8a; }
         .gravity-green-text { color: #16a34a; }
+
+        /* Slider Styles */
+        .image-slider { position: relative; width: 100%; height: 250px; background: #eee; overflow: hidden; }
+        .slider-img { width: 100%; height: 100%; object-fit: cover; display: none; }
+        .slider-img.active { display: block; }
+        .nav-arrow { 
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: rgba(255,255,255,0.8); color: #333; padding: 8px 12px; 
+            cursor: pointer; font-weight: bold; user-select: none; border-radius: 4px;
+            transition: background 0.2s; z-index: 10;
+        }
+        .nav-arrow:hover { background: white; }
+        .arrow-left { left: 10px; }
+        .arrow-right { right: 10px; }
+        
+        details summary::-webkit-details-marker { display: none; }
     </style>
 </head>
 <body class="text-gray-800">
@@ -40,9 +56,9 @@
 
             <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6 text-sm text-gray-700 space-y-3">
                 <p class="font-semibold text-blue-800 text-base">About the Store</p>
-                <p>Our goal is to provide high-quality Gravity gear at the best possible value. To keep the process simple, our pricing is <strong>all-inclusive</strong>—covering the base cost of the item plus shipping and fulfillment. This allows us to offer these items to at cost.</p>
+                <p>Our goal is to provide high-quality Gravity gear at the best possible value. Our pricing is all-inclusive—covering the base cost plus shipping.</p>
                 
-                <div class="bg-yellow-100 border border-yellow-200 p-3 rounded-md text-yellow-800 font-medium text-center">
+                <div class="bg-yellow-100 border border-yellow-200 p-3 rounded-md text-yellow-800 font-medium">
                     ✨ Use code <strong>GRAVITY10</strong> at checkout for $10 off your order!
                 </div>
 
@@ -50,7 +66,7 @@
                     <ul class="list-disc ml-5 space-y-1">
                         <li><strong>All sales are final.</strong></li>
                         <li>Items are subject to availability.</li>
-                        <li>Shipping takes 3–5 business days after payment.</li>
+                        <li>Shipping takes 3–5 business days.</li>
                     </ul>
                     <ul class="list-disc ml-5 space-y-1">
                         <li>Payment links sent by Accounting.</li>
@@ -60,22 +76,19 @@
                 </div>
             </div>
 
-            <div class="max-w-xs mx-auto">
-                <label class="block text-sm font-medium text-gray-700 mb-1 text-center">Enter Password to Shop</label>
-                <input type="password" id="password-input" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Password">
-                <button id="password-submit-btn" class="mt-4 w-full gravity-blue text-white font-semibold py-2 rounded-md transition-colors hover:gravity-blue-hover">
-                    Enter Store
-                </button>
-                <div id="password-error" class="mt-2 text-red-500 text-sm hidden text-center font-semibold">Incorrect password. Please try again.</div>
+            <div class="max-w-xs mx-auto text-center">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Enter Password to Shop</label>
+                <input type="password" id="password-input" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 outline-none mb-4" placeholder="Password">
+                <button id="password-submit-btn" class="w-full gravity-blue text-white font-semibold py-2 rounded-md hover:gravity-blue-hover">Enter Store</button>
+                <div id="password-error" class="mt-2 text-red-500 text-sm hidden font-semibold">Incorrect password. Please try again.</div>
             </div>
         </div>
     </div>
 
-    <div id="confirmationPage" class="fixed inset-0 bg-gray-50 flex items-center justify-center p-6 z-50 hidden text-center">
-        <div class="bg-white p-8 rounded-lg shadow-2xl max-w-xl">
+    <div id="confirmationPage" class="fixed inset-0 bg-gray-50 flex items-center justify-center p-6 z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-2xl max-w-xl text-center">
             <h1 class="text-3xl font-bold text-gray-900 mb-2">Order Submitted!</h1>
-            <p class="text-gray-600 mb-4">Check your email for a payment link from Accounting soon. Your gear will ship 3-5 days after payment is confirmed.</p>
-            <p class="text-sm font-semibold text-gray-500">Redirecting in <span id="countdown">5</span> seconds...</p>
+            <p class="text-gray-600">Check your email for a payment link from Accounting soon. Redirecting in <span id="countdown">5</span> seconds...</p>
         </div>
     </div>
 
@@ -97,25 +110,25 @@
             <aside class="w-full lg:w-1/3">
                 <form id="orderForm" class="bg-white p-6 rounded-lg shadow-lg cart-container">
                     <h2 class="text-2xl font-bold mb-4">Your Cart</h2>
-                    <div id="cartItems" class="space-y-4 mb-4 border-b pb-4"></div>
+                    <div id="cartItems" class="space-y-4 mb-4 border-b pb-4 text-sm"></div>
                     
                     <div class="space-y-2">
-                        <div class="flex justify-between items-center text-sm">
+                        <div class="flex justify-between text-sm">
                             <span>Subtotal:</span>
                             <span id="subtotalPrice">$0.00</span>
                         </div>
                         
                         <div class="flex gap-2 py-2">
-                            <input type="text" id="promoCode" class="flex-1 border rounded px-3 py-1 text-sm uppercase" placeholder="GRAVITY10">
+                            <input type="text" id="promoCode" class="flex-1 border rounded px-3 py-1 text-sm uppercase" placeholder="Promo Code">
                             <button type="button" id="applyPromo" class="bg-gray-200 px-3 py-1 rounded text-sm font-semibold hover:bg-gray-300">Apply</button>
                         </div>
 
-                        <div id="discountDisplay" class="hidden justify-between items-center text-sm font-bold text-red-600">
+                        <div id="discountDisplay" class="hidden justify-between text-sm font-bold text-red-600">
                             <span>Discount:</span>
                             <span id="discountAmount">-$0.00</span>
                         </div>
 
-                        <div class="flex justify-between items-center text-xl font-bold border-t pt-2">
+                        <div class="flex justify-between text-xl font-bold border-t pt-2">
                             <span>Total:</span>
                             <div id="totalPrice" class="gravity-green-text">$0.00</div>
                         </div>
@@ -123,11 +136,11 @@
                     
                     <div class="mt-6 space-y-4">
                         <input type="text" id="userName" required class="w-full border rounded px-3 py-2" placeholder="Full Name">
-                        <input type="email" id="userEmail" required class="w-full border rounded px-3 py-2" placeholder="Email Address">
+                        <input type="email" id="userEmail" required class="w-full border rounded px-3 py-2" placeholder="Email">
                         <textarea id="shippingAddress" required class="w-full border rounded px-3 py-2" placeholder="Shipping Address"></textarea>
                     </div>
 
-                    <button type="submit" class="mt-6 w-full text-white font-semibold py-3 rounded gravity-blue gravity-blue-hover">Submit Order</button>
+                    <button type="submit" class="mt-6 w-full text-white font-semibold py-3 rounded gravity-blue hover:gravity-blue-hover">Submit Order</button>
                     <div id="messageBox" class="mt-4 p-3 rounded hidden"></div>
                 </form>
             </aside>
@@ -137,81 +150,76 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const inventory = [
-                { id: '1', name: 'Gravity T-Shirt', price: 20.00, imageUrl: 'https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/gravity-tshirt.jpg?raw=true', description: 'Standard T-Shirt', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'] },
-                { id: '2', name: 'Gravity T-Shirt (New Hire Swag)', price: 20.00, imageUrl: 'https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/gravity-tshirt-new.jpg?raw=true', description: 'New Hire Edition', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL', '4XL'] },
-                { id: '3', name: 'Gravity Sweatshirt - Men\'s/Unisex', price: 40.00, imageUrl: 'https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/mens-sweatshirt.jpg?raw=true', description: 'Unisex cut', sizes: ['S', 'M', 'L', 'XL', '2XL'] },
-                { id: '4', name: 'Gravity Sweatshirt - Women\'s', price: 40.00, imageUrl: 'https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/womens-sweatshirt.jpg?raw=true', description: 'Women\'s cut', sizes: ['S', 'M', 'L', 'XL', '2XL'] },
-                { id: '5', name: 'Gravity Branded Hi-liter', price: 2.00, imageUrl: 'https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/hiliter.jpg?raw=true', description: 'Office essential', isAddon: true },
-                { id: '6', name: 'Gravity Branded Notebook', price: 25.00, imageUrl: 'https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/full-notebook.jpg?raw=true', description: 'Large notebook' },
-                { id: '7', name: 'Gravity Pen', price: .50, imageUrl: 'https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/pens.jpg?raw=true', description: 'Ballpoint pen', isAddon: true },
-                { id: '8', name: 'Gravity Waterbottle', price: 25.00, imageUrl: 'https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/steel-bottle-new.jpg?raw=true', description: '32oz Steel Bottle' }
+                { id: '1', name: 'Gravity T-Shirt', price: 20.00, images: ['https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/gravity-tshirt.jpg?raw=true'], description: 'Standard T-Shirt', fullDescription: 'A premium cotton-blend shirt with a tagless design for ultimate comfort.', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'] },
+                { id: '2', name: 'Gravity T-Shirt (New Hire)', price: 20.00, images: ['https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/gravity-tshirt-new.jpg?raw=true'], description: 'New Hire Edition', fullDescription: 'Special edition shirt for our newest team members. Same great quality.', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'] },
+                { id: '3', name: 'Gravity Sweatshirt - Men', price: 40.00, images: ['https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/mens-sweatshirt.jpg?raw=true'], description: 'Men\'s cut', fullDescription: 'Heavyweight fleece-lined sweatshirt designed for warmth and durability.', sizes: ['S', 'M', 'L', 'XL', '2XL'] },
+                { id: '4', name: 'Gravity Sweatshirt - Women', price: 40.00, images: ['https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/womens-sweatshirt.jpg?raw=true'], description: 'Women\'s cut', fullDescription: 'Tailored fleece-lined sweatshirt with a soft feel and modern fit.', sizes: ['S', 'M', 'L', 'XL', '2XL'] },
+                { id: '5', name: 'Gravity Hi-liter', price: 2.00, images: ['https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/hiliter.jpg?raw=true'], description: 'Office essential', fullDescription: 'Chisel tip highlighter in Gravity Green. Smear-resistant ink.', isAddon: true },
+                { id: '6', name: 'Gravity Notebook', price: 25.00, images: ['https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/full-notebook.jpg?raw=true'], description: 'Large notebook', fullDescription: 'Hardcover bound notebook with 160 pages of premium ruled paper.' },
+                { id: '7', name: 'Gravity Pens', price: 0.50, images: ['https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/pens.jpg?raw=true'], description: 'Ballpoint pen', fullDescription: 'Smooth writing black ink ballpoint pen with a comfortable grip.', isAddon: true },
+                { id: '8', name: 'Gravity Waterbottle', price: 25.00, images: ['https://github.com/kflynn-gravity/Gravity-Swag-Store/blob/7620a012f7368e715b7cf4274dc71120867e9a28/images/steel-bottle-new.jpg?raw=true'], description: '32oz Steel Bottle', fullDescription: 'Double-walled vacuum insulated stainless steel. Keeps drinks cold for 24 hours.' }
             ];
 
             const addonIds = ['5', '7']; 
             let cart = {}; 
-            let discount = 0;
+            let discountValue = 0;
             const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSc5jB0nhVWjpjHoViUiEJqX7BBheodhDNge6Pzb12yhTrnG3Q/formResponse';
             const ACCESS_PASSWORD = 'GravitySwag123';
 
-            const promoBtn = document.getElementById('applyPromo');
-            const promoInput = document.getElementById('promoCode');
-            const discountDisplay = document.getElementById('discountDisplay');
-            const discountAmount = document.getElementById('discountAmount');
-            const subtotalPriceElement = document.getElementById('subtotalPrice');
-            const totalPriceElement = document.getElementById('totalPrice');
             const swagList = document.getElementById('swagList');
             const cartItemsContainer = document.getElementById('cartItems');
+            const subtotalPriceElement = document.getElementById('subtotalPrice');
+            const totalPriceElement = document.getElementById('totalPrice');
             const orderForm = document.getElementById('orderForm');
             const messageBox = document.getElementById('messageBox');
 
-            // Password Check
-            document.getElementById('password-submit-btn').addEventListener('click', () => {
-                if (document.getElementById('password-input').value === ACCESS_PASSWORD) {
-                    document.getElementById('password-screen').classList.add('hidden');
-                    document.getElementById('mainContent').classList.remove('hidden');
-                } else {
-                    document.getElementById('password-error').classList.remove('hidden');
-                }
-            });
-
-            // Promo Logic
-            promoBtn.addEventListener('click', () => {
-                if (promoInput.value.toUpperCase() === 'GRAVITY10') {
-                    discount = 10;
-                    discountDisplay.classList.remove('hidden');
-                    discountDisplay.classList.add('flex');
-                    alert('Promo code applied: $10 off!');
-                } else {
-                    alert('Invalid code');
-                    discount = 0;
-                    discountDisplay.classList.add('hidden');
-                }
-                updateCart();
-            });
+            // Image Switching
+            window.changeImg = function(itemId, dir) {
+                const card = document.getElementById(`card-${itemId}`);
+                const imgs = card.querySelectorAll('.slider-img');
+                let activeIdx = Array.from(imgs).findIndex(img => img.classList.contains('active'));
+                imgs[activeIdx].classList.remove('active');
+                activeIdx = (activeIdx + dir + imgs.length) % imgs.length;
+                imgs[activeIdx].classList.add('active');
+            };
 
             function renderSwagList() {
                 swagList.innerHTML = '';
                 inventory.forEach(item => {
-                    const hasSizes = item.sizes && item.sizes.length > 0;
                     const card = document.createElement('div');
-                    card.className = 'bg-white rounded-lg shadow overflow-hidden relative';
-                    const addonBadge = item.isAddon ? `<span class="absolute top-2 right-2 bg-yellow-100 text-yellow-800 text-xs font-bold px-2 py-1 rounded">ADD-ON ONLY</span>` : '';
+                    card.id = `card-${item.id}`;
+                    card.className = 'bg-white rounded-lg shadow overflow-hidden flex flex-col relative';
+                    
+                    const imagesHTML = item.images.map((img, i) => 
+                        `<img src="${img}" class="slider-img ${i === 0 ? 'active' : ''}">`
+                    ).join('');
 
                     card.innerHTML = `
-                        ${addonBadge}
-                        <img src="${item.imageUrl}" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="font-bold">${item.name}</h3>
-                            <p class="text-sm text-gray-500">${item.description}</p>
-                            ${hasSizes ? `<select id="size-${item.id}" class="w-full mt-2 border rounded text-sm">
-                                ${item.sizes.map(s => `<option value="${s}">${s}</option>`).join('')}
-                            </select>` : ''}
-                            <div class="mt-4 flex justify-between items-center">
-                                <span class="font-bold gravity-green-text">$${item.price.toFixed(2)}</span>
-                                <div class="flex items-center gap-2">
-                                    <button data-id="${item.id}" data-has-sizes="${hasSizes}" class="rem-btn bg-gray-200 px-2 rounded">-</button>
-                                    <span id="qty-${item.id}">0</span>
-                                    <button data-id="${item.id}" data-has-sizes="${hasSizes}" class="add-btn gravity-blue text-white px-2 rounded">+</button>
+                        <div class="image-slider">
+                            ${imagesHTML}
+                            ${item.images.length > 1 ? `
+                                <div class="nav-arrow arrow-left" onclick="changeImg('${item.id}', -1)">&#10094;</div>
+                                <div class="nav-arrow arrow-right" onclick="changeImg('${item.id}', 1)">&#10095;</div>
+                            ` : ''}
+                        </div>
+                        <div class="p-4 flex-1 flex flex-col">
+                            <h3 class="font-bold text-lg">${item.name}</h3>
+                            <p class="text-sm text-gray-500 mb-2">${item.description}</p>
+                            <details class="mb-4 text-xs">
+                                <summary class="text-blue-600 cursor-pointer font-semibold uppercase">Product Details +</summary>
+                                <p class="mt-2 text-gray-600">${item.fullDescription}</p>
+                            </details>
+                            <div class="mt-auto">
+                                ${item.sizes ? `<select id="size-${item.id}" class="w-full border rounded mb-3 p-1 text-sm">
+                                    ${item.sizes.map(s => `<option value="${s}">${s}</option>`).join('')}
+                                </select>` : ''}
+                                <div class="flex justify-between items-center">
+                                    <span class="font-bold gravity-green-text">$${item.price.toFixed(2)}</span>
+                                    <div class="flex items-center gap-2">
+                                        <button data-id="${item.id}" class="rem-btn bg-gray-200 px-2 rounded">-</button>
+                                        <span id="qty-${item.id}" class="w-4 text-center font-bold">0</span>
+                                        <button data-id="${item.id}" class="add-btn gravity-blue text-white px-2 rounded">+</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>`;
@@ -230,68 +238,77 @@
                         const item = inventory.find(i => i.id === id);
                         subtotal += item.price * cart[key];
                         const div = document.createElement('div');
-                        div.className = 'flex justify-between text-sm';
-                        div.innerHTML = `<span>${item.name}${size ? ' ('+size+')' : ''} x${cart[key]}</span><span>$${(item.price * cart[key]).toFixed(2)}</span>`;
+                        div.className = 'flex justify-between';
+                        div.innerHTML = `<span>${item.name} ${size ? '('+size+')' : ''} x${cart[key]}</span><span>$${(item.price * cart[key]).toFixed(2)}</span>`;
                         cartItemsContainer.appendChild(div);
                     }
                 }
-
-                let currentDiscount = (subtotal > 0) ? Math.min(subtotal, discount) : 0;
-                let finalTotal = subtotal - currentDiscount;
-
+                let currentDiscount = subtotal > 0 ? Math.min(subtotal, discountValue) : 0;
                 subtotalPriceElement.textContent = `$${subtotal.toFixed(2)}`;
-                discountAmount.textContent = `-$${currentDiscount.toFixed(2)}`;
-                totalPriceElement.textContent = `$${finalTotal.toFixed(2)}`;
-                
+                document.getElementById('discountAmount').textContent = `-$${currentDiscount.toFixed(2)}`;
+                totalPriceElement.textContent = `$${(subtotal - currentDiscount).toFixed(2)}`;
                 if (empty) cartItemsContainer.innerHTML = '<p class="text-gray-400 text-center">Empty</p>';
             }
 
+            // Events
+            document.getElementById('password-submit-btn').addEventListener('click', () => {
+                if (document.getElementById('password-input').value === ACCESS_PASSWORD) {
+                    document.getElementById('password-screen').classList.add('hidden');
+                    document.getElementById('mainContent').classList.remove('hidden');
+                } else { document.getElementById('password-error').classList.remove('hidden'); }
+            });
+
+            document.getElementById('applyPromo').addEventListener('click', () => {
+                if (document.getElementById('promoCode').value.toUpperCase() === 'GRAVITY10') {
+                    discountValue = 10;
+                    document.getElementById('discountDisplay').classList.remove('hidden');
+                    alert('Promo Applied!');
+                } else { 
+                    alert('Invalid Code'); 
+                    discountValue = 0; 
+                    document.getElementById('discountDisplay').classList.add('hidden'); 
+                }
+                updateCart();
+            });
+
             swagList.addEventListener('click', (e) => {
-                const addBtn = e.target.closest('.add-btn');
-                const remBtn = e.target.closest('.rem-btn');
-                if (!addBtn && !remBtn) return;
-                const btn = addBtn || remBtn;
+                const btn = e.target.closest('.add-btn, .rem-btn');
+                if (!btn) return;
                 const id = btn.dataset.id;
-                const size = btn.dataset.hasSizes === 'true' ? document.getElementById(`size-${id}`).value : '';
+                const sizeSel = document.getElementById(`size-${id}`);
+                const size = sizeSel ? sizeSel.value : '';
                 const key = `${id}_${size}`;
-                if (addBtn) cart[key] = (cart[key] || 0) + 1;
-                else if (remBtn && cart[key] > 0) cart[key]--;
+                if (btn.classList.contains('add-btn')) cart[key] = (cart[key] || 0) + 1;
+                else if (cart[key] > 0) cart[key]--;
                 
                 let q = 0;
                 for (let k in cart) if (k.startsWith(id + '_')) q += cart[k];
-                const qtySpan = document.getElementById(`qty-${id}`);
-                if (qtySpan) qtySpan.textContent = q;
+                document.getElementById(`qty-${id}`).textContent = q;
                 updateCart();
             });
 
             orderForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 let hasMainItem = false;
-                let hasAddonItem = false;
+                let hasAddonOnly = false;
                 let itemsList = [];
 
                 for (let key in cart) {
                     if (cart[key] > 0) {
                         const [id, size] = key.split('_');
                         const item = inventory.find(i => i.id === id);
-                        
-                        if (addonIds.includes(id)) {
-                            hasAddonItem = true;
-                        } else {
-                            hasMainItem = true;
-                        }
+                        if (addonIds.includes(id)) hasAddonOnly = true;
+                        else hasMainItem = true;
                         itemsList.push(`${cart[key]}x ${item.name}${size ? ' ('+size+')' : ''}`);
                     }
                 }
 
-                // Add-on only restriction logic
-                if (hasAddonItem && !hasMainItem) {
-                    showMessage('Hi-liters and pens are add-on only. Please add a larger item (shirt, sweatshirt, or bottle) to checkout.', 'bg-red-100 text-red-800');
+                if (hasAddonOnly && !hasMainItem) {
+                    alert('Add-on items require a main item (Shirt, Notebook, or Bottle).');
                     return;
                 }
-
                 if (itemsList.length === 0) {
-                    showMessage('Your cart is empty.', 'bg-red-100 text-red-800');
+                    alert('Cart is empty.');
                     return;
                 }
 
@@ -300,31 +317,21 @@
                 formData.append('entry.281140994', document.getElementById('userEmail').value);
                 formData.append('entry.963635525', document.getElementById('shippingAddress').value);
                 formData.append('entry.751079573', itemsList.join(', '));
-                formData.append('entry.1759210502', totalPriceElement.textContent + (discount > 0 ? " (incl. $10 off)" : ""));
+                formData.append('entry.1759210502', totalPriceElement.textContent);
 
                 try {
                     await fetch(googleFormUrl, { method: 'POST', mode: 'no-cors', body: formData });
                     document.getElementById('confirmationPage').classList.remove('hidden');
                     let count = 5;
-                    const interval = setInterval(() => {
+                    const timer = setInterval(() => {
                         count--;
                         document.getElementById('countdown').textContent = count;
-                        if(count <= 0) {
-                            clearInterval(interval);
-                            location.reload();
-                        }
+                        if(count <= 0) { clearInterval(timer); location.reload(); }
                     }, 1000);
                 } catch (err) {
-                    showMessage('Error sending order. Please contact TA.', 'bg-red-100 text-red-800');
+                    alert('Error sending order.');
                 }
             });
-
-            function showMessage(m, c) {
-                messageBox.textContent = m;
-                messageBox.className = `mt-4 p-3 rounded ${c}`;
-                messageBox.classList.remove('hidden');
-                setTimeout(() => messageBox.classList.add('hidden'), 5000);
-            }
 
             renderSwagList();
             updateCart();

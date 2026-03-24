@@ -104,7 +104,14 @@
 
         <main class="container mx-auto px-6 py-12 flex flex-col lg:flex-row gap-8">
             <div class="flex-1">
-                <div id="swagList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+                <h2 class="text-2xl font-bold mb-6 border-b pb-2">Main Collection</h2>
+                <div id="swagList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12"></div>
+
+                <div class="bg-gray-100 p-6 rounded-xl mb-6">
+                    <h2 class="text-2xl font-bold">Add-on Items</h2>
+                    <p class="text-sm text-gray-600">These items can only be purchased when accompanied by at least one "Main Collection" item (Shirt, Sweatshirt, Large Notebook, Bottle, or Mug).</p>
+                </div>
+                <div id="addonList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
             </div>
 
             <aside class="w-full lg:w-1/3">
@@ -150,18 +157,18 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const inventory = [
-    { id: '1', name: 'Gravity T-Shirt', price: 17.00, images: ['https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/gravity-tshirt-new-front.png', 'https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/gravity-tshirt-new-back.png'], description: 'Standard T-Shirt', fullDescription: 'A premium cotton-blend shirt with a tagless design for ultimate comfort. Features the classic Gravity logo on the front and a vibrant Boise, Idaho skyline graphic on the back.', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'] },
-    { id: '2', name: 'Gravity T-Shirt (New Hire)', price: 20.00, images: ['https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/gravity-tshirt-new-front.png', 'https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/gravity-tshirt-new-back.png'], description: 'New Hire Edition', fullDescription: 'Special edition shirt for our newest team members. Same great quality.', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'] },
-    { id: '3', name: 'Gravity Sweatshirt - Men', price: 40.00, images: ['https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/mens-sweatshirt-front.png', 'https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/mens-sweatshirt-back.png'], description: 'Men\'s cut', fullDescription: 'Heavyweight fleece-lined sweatshirt designed for warmth and durability.', sizes: ['S', 'M', 'L', 'XL', '2XL'] },
-    { id: '4', name: 'Gravity Sweatshirt - Women', price: 40.00, images: ['https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/womens-sweatshirt-front.png', 'https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/womens-sweatshirt-back.png'], description: 'Women\'s cut', fullDescription: 'Tailored fleece-lined sweatshirt with a soft feel and modern fit.', sizes: ['S', 'M', 'L', 'XL', '2XL'] },
-    { id: '5', name: 'Gravity Hi-liter', price: 2.00, images: ['https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/hiliter-front.png', 'https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/hiliter-detail.png'], description: 'Office essential', fullDescription: 'Chisel tip highlighter in Gravity Green. Smear-resistant ink.', isAddon: true },
-    { id: '6', name: 'Gravity Notebook', price: 25.00, images: ['https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/padfolio-front.png', 'https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/padfolio-inside.png'], description: 'Large notebook', fullDescription: 'A sleek, black faux-leather padfolio featuring an embossed Gravity Payments logo.' },
-    { id: '7', name: 'Gravity Pens', price: 0.50, images: ['https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/pens-front.png', 'https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/pens-detail.png'], description: 'Ballpoint pen', fullDescription: 'Smooth writing black ink ballpoint pen with a comfortable grip.', isAddon: true },
-    { id: '8', name: 'Gravity Waterbottle', price: 25.00, images: ['https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/steel-bottle-front.png', 'https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/steel-bottle-detail.png'], description: '32oz Steel Bottle', fullDescription: 'Double-walled vacuum insulated stainless steel. Keeps drinks cold for 24 hours.' },
-    { id: '9', name: 'Gravity Blue Notebook', price: 9.00, images: ['https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/Notebook-front.png', 'https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/Notebook-inside.png'], description: 'Spiral notebook', fullDescription: 'Lined pages for all your meeting notes.', isAddon: true },
-    { id: '10', name: 'Gravity Sticky Notes', price: 3.00, images: ['https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/sticky-notes-front.png'], description: 'Quick reminders', fullDescription: 'Standard 3x3 sticky notes in Gravity colors.', isAddon: true },
-    { id: '11', name: 'Gravity Ceramic Cup', price: 20.00, images: ['https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/cup-front.png'], description: 'Gravity Elemental Mug', fullDescription: 'Elemental Artisan Insulated Tumbler, Triple Wall Coffee Travel Mug, Reusable Stainless Steel Coffee Tumbler with Ceramic Lid, Thermal Coffee Cups for Hot (6 Hrs) & Cold (18 Hrs), 12oz - White Marble.' }
-];
+                { id: '1', name: 'Gravity T-Shirt', price: 17.00, images: ['https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/gravity-tshirt-new-front.png', 'https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/gravity-tshirt-new-back.png'], description: 'Standard T-Shirt', fullDescription: 'A premium cotton-blend shirt with a tagless design for ultimate comfort. Features the classic Gravity logo on the front and a vibrant Boise, Idaho skyline graphic on the back.', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'] },
+                { id: '2', name: 'Gravity T-Shirt (New Hire)', price: 20.00, images: ['https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/gravity-tshirt-new-front.png', 'https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/gravity-tshirt-new-back.png'], description: 'New Hire Edition', fullDescription: 'Special edition shirt for our newest team members. Same great quality.', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'] },
+                { id: '3', name: 'Gravity Sweatshirt - Men', price: 40.00, images: ['https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/mens-sweatshirt-front.png', 'https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/mens-sweatshirt-back.png'], description: 'Men\'s cut', fullDescription: 'Heavyweight fleece-lined sweatshirt designed for warmth and durability.', sizes: ['S', 'M', 'L', 'XL', '2XL'] },
+                { id: '4', name: 'Gravity Sweatshirt - Women', price: 40.00, images: ['https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/womens-sweatshirt-front.png', 'https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/womens-sweatshirt-back.png'], description: 'Women\'s cut', fullDescription: 'Tailored fleece-lined sweatshirt with a soft feel and modern fit.', sizes: ['S', 'M', 'L', 'XL', '2XL'] },
+                { id: '5', name: 'Gravity Hi-liter', price: 2.00, images: ['https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/hiliter-front.png', 'https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/hiliter-detail.png'], description: 'Office essential', fullDescription: 'Chisel tip highlighter in Gravity Green. Smear-resistant ink.', isAddon: true },
+                { id: '6', name: 'Gravity Notebook', price: 25.00, images: ['https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/padfolio-front.png', 'https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/padfolio-inside.png'], description: 'Large notebook', fullDescription: 'A sleek, black faux-leather padfolio featuring an embossed Gravity Payments logo.' },
+                { id: '7', name: 'Gravity Pens', price: 0.50, images: ['https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/pens-front.png', 'https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/pens-detail.png'], description: 'Ballpoint pen', fullDescription: 'Smooth writing black ink ballpoint pen with a comfortable grip.', isAddon: true },
+                { id: '8', name: 'Gravity Waterbottle', price: 25.00, images: ['https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/steel-bottle-front.png', 'https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/steel-bottle-detail.png'], description: '32oz Steel Bottle', fullDescription: 'Double-walled vacuum insulated stainless steel. Keeps drinks cold for 24 hours.' },
+                { id: '9', name: 'Gravity Blue Notebook', price: 19.00, images: ['https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/Notebook-front.png', 'https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/Notebook-inside.png'], description: 'A5 Notebook', fullDescription: 'Lined pages for all your meeting notes.', isAddon: true },
+                { id: '10', name: 'Gravity Sticky Notes', price: 3.00, images: ['https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/sticky-notes-front.png'], description: 'Quick reminders', fullDescription: 'Standard 3x3 sticky notes in Gravity colors.', isAddon: true },
+                { id: '11', name: 'Gravity Ceramic Cup', price: 25.00, images: ['https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/cup-front.png'], description: 'Gravity Elemental Mug', fullDescription: 'Elemental Artisan Insulated Tumbler, Triple Wall Coffee Travel Mug, Reusable Stainless Steel Coffee Tumbler with Ceramic Lid, Thermal Coffee Cups for Hot (6 Hrs) & Cold (18 Hrs), 12oz - White Marble.' }
+            ];
 
             const addonIds = ['5', '7', '9', '10'];
             let cart = {}; 
@@ -170,13 +177,12 @@
             const ACCESS_PASSWORD = 'GravitySwag123';
 
             const swagList = document.getElementById('swagList');
+            const addonList = document.getElementById('addonList');
             const cartItemsContainer = document.getElementById('cartItems');
             const subtotalPriceElement = document.getElementById('subtotalPrice');
             const totalPriceElement = document.getElementById('totalPrice');
             const orderForm = document.getElementById('orderForm');
-            const messageBox = document.getElementById('messageBox');
 
-            // Image Switching
             window.changeImg = function(itemId, dir) {
                 const card = document.getElementById(`card-${itemId}`);
                 const imgs = card.querySelectorAll('.slider-img');
@@ -188,6 +194,8 @@
 
             function renderSwagList() {
                 swagList.innerHTML = '';
+                addonList.innerHTML = '';
+                
                 inventory.forEach(item => {
                     const card = document.createElement('div');
                     card.id = `card-${item.id}`;
@@ -199,6 +207,7 @@
 
                     card.innerHTML = `
                         <div class="image-slider">
+                            ${item.isAddon ? `<div class="absolute top-2 left-2 z-20 bg-orange-500 text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm">ADD-ON ONLY</div>` : ''}
                             ${imagesHTML}
                             ${item.images.length > 1 ? `
                                 <div class="nav-arrow arrow-left" onclick="changeImg('${item.id}', -1)">&#10094;</div>
@@ -226,7 +235,12 @@
                                 </div>
                             </div>
                         </div>`;
-                    swagList.appendChild(card);
+
+                    if (item.isAddon) {
+                        addonList.appendChild(card);
+                    } else {
+                        swagList.appendChild(card);
+                    }
                 });
             }
 
@@ -253,7 +267,6 @@
                 if (empty) cartItemsContainer.innerHTML = '<p class="text-gray-400 text-center">Empty</p>';
             }
 
-            // Events
             document.getElementById('password-submit-btn').addEventListener('click', () => {
                 if (document.getElementById('password-input').value === ACCESS_PASSWORD) {
                     document.getElementById('password-screen').classList.add('hidden');
@@ -274,7 +287,8 @@
                 updateCart();
             });
 
-            swagList.addEventListener('click', (e) => {
+            // Handle clicks for both main and addon lists
+            const handleCartClick = (e) => {
                 const btn = e.target.closest('.add-btn, .rem-btn');
                 if (!btn) return;
                 const id = btn.dataset.id;
@@ -288,26 +302,29 @@
                 for (let k in cart) if (k.startsWith(id + '_')) q += cart[k];
                 document.getElementById(`qty-${id}`).textContent = q;
                 updateCart();
-            });
+            };
+
+            swagList.addEventListener('click', handleCartClick);
+            addonList.addEventListener('click', handleCartClick);
 
             orderForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 let hasMainItem = false;
-                let hasAddonOnly = false;
+                let hasAddon = false;
                 let itemsList = [];
 
                 for (let key in cart) {
                     if (cart[key] > 0) {
                         const [id, size] = key.split('_');
                         const item = inventory.find(i => i.id === id);
-                        if (addonIds.includes(id)) hasAddonOnly = true;
+                        if (addonIds.includes(id)) hasAddon = true;
                         else hasMainItem = true;
                         itemsList.push(`${cart[key]}x ${item.name}${size ? ' ('+size+')' : ''}`);
                     }
                 }
 
-                if (hasAddonOnly && !hasMainItem) {
-                    alert('Add-on items require a main item (Shirt, Notebook, or Bottle).');
+                if (hasAddon && !hasMainItem) {
+                    alert('Add-on items require a main item (Shirt, Sweatshirt, Large Notebook, Bottle, or Mug) to be in your cart.');
                     return;
                 }
                 if (itemsList.length === 0) {

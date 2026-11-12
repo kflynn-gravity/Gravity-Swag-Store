@@ -161,6 +161,94 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Helper to generate clean placeholder product illustrations until final photos are uploaded
+            const makePlaceholderImg = (svgBody, bg = '#f1f5f9') =>
+                `data:image/svg+xml;utf8,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300"><rect width="400" height="300" fill="${bg}"/>${svgBody}</svg>`)}`;
+
+            const placeholderGraphics = {
+                journalFront: makePlaceholderImg(`
+                    <rect x="125" y="30" width="155" height="225" rx="8" fill="#1e293b"/>
+                    <g fill="none" stroke="#cbd5e1" stroke-width="3">
+                        <path d="M113 48h20M113 68h20M113 88h20M113 108h20M113 128h20M113 148h20M113 168h20M113 188h20M113 208h20M113 228h20"/>
+                    </g>
+                    <circle cx="205" cy="140" r="44" fill="#ffffff" stroke="#84cc16" stroke-width="6"/>
+                    <circle cx="242" cy="175" r="7" fill="#84cc16" stroke="#ffffff" stroke-width="3"/>
+                    <text x="205" y="157" font-family="Arial, sans-serif" font-size="56" font-weight="bold" fill="#1e293b" text-anchor="middle">g</text>
+                    <text x="200" y="282" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#64748b" text-anchor="middle">MIDNIGHT BLUE SPIRAL JOURNAL (5.25" x 7.125")</text>
+                `),
+                journalInsert: makePlaceholderImg(`
+                    <rect x="125" y="30" width="155" height="225" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+                    <circle cx="202" cy="120" r="40" fill="none" stroke="#84cc16" stroke-width="6"/>
+                    <circle cx="238" cy="154" r="6" fill="#84cc16"/>
+                    <text x="202" y="136" font-family="Arial, sans-serif" font-size="52" font-weight="bold" fill="#1e293b" text-anchor="middle">g</text>
+                    <text x="202" y="205" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1e293b" text-anchor="middle">gravity</text>
+                    <text x="202" y="220" font-family="Arial, sans-serif" font-size="9" font-weight="bold" letter-spacing="3" fill="#84cc16" text-anchor="middle">PAYMENTS</text>
+                    <text x="200" y="282" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#64748b" text-anchor="middle">FIRST PAGE INSERT PROOF</text>
+                `),
+                hoodie: makePlaceholderImg(`
+                    <path d="M145 55 L110 80 L85 215 L115 220 L132 125 L132 245 L268 245 L268 125 L285 220 L315 215 L290 80 L255 55 Q200 78 145 55 Z" fill="#111827"/>
+                    <path d="M160 55 Q200 25 240 55 Q200 80 160 55 Z" fill="#1f2937"/>
+                    <path d="M155 180 L245 180 L252 235 L148 235 Z" fill="none" stroke="#374151" stroke-width="2"/>
+                    <circle cx="235" cy="105" r="14" fill="none" stroke="#84cc16" stroke-width="2.5"/>
+                    <circle cx="247" cy="117" r="2.5" fill="#84cc16"/>
+                    <text x="235" y="110" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">g</text>
+                    <g transform="translate(103, 165) rotate(-78)">
+                        <text x="0" y="0" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">gravity</text>
+                        <text x="0" y="10" font-family="Arial, sans-serif" font-size="6" font-weight="bold" letter-spacing="2" fill="#84cc16" text-anchor="middle">PAYMENTS</text>
+                    </g>
+                    <text x="200" y="282" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#64748b" text-anchor="middle">BLACK PULLOVER HOODIE (SLEEVE PRINT)</text>
+                `),
+                longSleeveFront: makePlaceholderImg(`
+                    <path d="M150 50 L110 72 L80 220 L108 225 L132 115 L132 245 L268 245 L268 115 L292 225 L320 220 L290 72 L250 50 Q200 72 150 50 Z" fill="#0f2942"/>
+                    <text x="200" y="108" font-family="monospace" font-size="9" fill="#ffffff" text-anchor="middle">gravity gravity gravity</text>
+                    <text x="200" y="120" font-family="monospace" font-size="9" fill="#84cc16" text-anchor="middle">payments gravity payments</text>
+                    <text x="200" y="132" font-family="monospace" font-size="9" fill="#ffffff" text-anchor="middle">gravity gravity gravity</text>
+                    <text x="200" y="282" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#64748b" text-anchor="middle">NAVY LONG SLEEVE - FRONT GRAPHIC</text>
+                `),
+                longSleeveBack: makePlaceholderImg(`
+                    <path d="M150 50 L110 72 L80 220 L108 225 L132 115 L132 245 L268 245 L268 115 L292 225 L320 220 L290 72 L250 50 Q200 62 150 50 Z" fill="#0f2942"/>
+                    <circle cx="200" cy="84" r="13" fill="none" stroke="#84cc16" stroke-width="2.5"/>
+                    <circle cx="211" cy="95" r="2.5" fill="#84cc16"/>
+                    <text x="200" y="89" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#ffffff" text-anchor="middle">g</text>
+                    <text x="200" y="282" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#64748b" text-anchor="middle">NAVY LONG SLEEVE - BACK NECK ICON</text>
+                `),
+                gelPen: makePlaceholderImg(`
+                    <rect x="193" y="22" width="14" height="14" rx="2" fill="#cbd5e1"/>
+                    <rect x="188" y="34" width="24" height="130" rx="6" fill="#3b496b"/>
+                    <rect x="188" y="164" width="24" height="6" fill="#cbd5e1"/>
+                    <rect x="187" y="170" width="26" height="62" rx="4" fill="#4f5d7e"/>
+                    <polygon points="189,232 211,232 203,254 197,254" fill="#4f5d7e"/>
+                    <polygon points="198,254 202,254 200,262" fill="#94a3b8"/>
+                    <g transform="translate(204, 96) rotate(-90)">
+                        <text x="0" y="0" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#ffffff" text-anchor="middle">gravity</text>
+                        <text x="0" y="9" font-family="Arial, sans-serif" font-size="6" font-weight="bold" letter-spacing="2" fill="#e2e8f0" text-anchor="middle">PAYMENTS</text>
+                    </g>
+                    <text x="200" y="156" font-family="Georgia, serif" font-style="italic" font-size="9" fill="#cbd5e1" text-anchor="middle">Sharpie</text>
+                    <text x="200" y="284" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#64748b" text-anchor="middle">GRAVITY SHARPIE S-GEL PEN</text>
+                `),
+                stickerSheet: makePlaceholderImg(`
+                    <rect x="45" y="35" width="310" height="210" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+                    <circle cx="105" cy="82" r="24" fill="#84cc16"/>
+                    <text x="105" y="91" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#ffffff" text-anchor="middle">g</text>
+                    <text x="105" y="122" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#1e293b" text-anchor="middle">gravity</text>
+                    <circle cx="200" cy="95" r="34" fill="#1e293b" stroke="#84cc16" stroke-width="3"/>
+                    <text x="200" y="106" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#ffffff" text-anchor="middle">g</text>
+                    <circle cx="295" cy="90" r="28" fill="none" stroke="#84cc16" stroke-width="2" stroke-dasharray="3,3"/>
+                    <text x="295" y="88" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#1e293b" text-anchor="middle">Real People</text>
+                    <text x="295" y="100" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#84cc16" text-anchor="middle">Real Support</text>
+                    <rect x="235" y="142" width="105" height="36" rx="4" fill="#1e293b" transform="rotate(8 287 160)"/>
+                    <text x="287" y="164" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#ffffff" text-anchor="middle" transform="rotate(8 287 160)">People Over Profit</text>
+                    <circle cx="165" cy="168" r="26" fill="#1e293b"/>
+                    <text x="165" y="165" font-family="Arial, sans-serif" font-size="7" fill="#ffffff" text-anchor="middle">BUILD.</text>
+                    <text x="165" y="174" font-family="Arial, sans-serif" font-size="7" fill="#84cc16" text-anchor="middle">CONNECT.</text>
+                    <text x="165" y="183" font-family="Arial, sans-serif" font-size="7" fill="#ffffff" text-anchor="middle">GROW.</text>
+                    <text x="210" y="222" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1e293b" text-anchor="middle">gravity</text>
+                    <circle cx="305" cy="212" r="22" fill="none" stroke="#84cc16" stroke-width="4"/>
+                    <text x="305" y="220" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1e293b" text-anchor="middle">g</text>
+                    <text x="200" y="282" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#64748b" text-anchor="middle">6" x 4" DIE-CUT STICKER SHEET</text>
+                `)
+            };
+
             const inventory = [
                 { id: '1', name: 'Gravity T-Shirt', price: 17.00, images: ['https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/gravity-tshirt-new-front.png', 'https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/gravity-tshirt-new-back.png'], description: 'Standard T-Shirt', fullDescription: 'A premium cotton-blend shirt with a tagless design for ultimate comfort. Features the classic Gravity logo on the front and a vibrant Boise, Idaho skyline graphic on the back.', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'] },
                 { id: '2', name: 'Gravity T-Shirt (New Hire)', price: 20.00, images: ['https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/gravity-tshirt-new-front.png', 'https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/gravity-tshirt-new-back.png'], description: 'New Hire Edition', fullDescription: 'Special edition shirt for our newest team members. Same great quality.', sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'] },
@@ -188,10 +276,17 @@
                 { id: '24', name: 'Gravity Payments journal (grey)', price: 10.00, images: ['https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/Gravity Journal (grey).jpg'], description: '', fullDescription: '' },
                 { id: '25', name: 'Gravity Payment Portal koosie', price: 1.00, images: ['https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/Gravity Payments Portal koosie AI generated.png'], description: '', fullDescription: '', isAddon: true },
                 { id: '26', name: 'Gravity Gives Tank top', price: 15.00, images: ['https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/Gravity Gives tank top male model.jpg'], description: '', fullDescription: '', sizes: ['XS', 'Small', 'Medium', 'Large', 'XL'] },
-                { id: '27', name: 'Gravity Gives T-Shirt', price: 15.00, images: ['https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/Gravity Gives T-Shirt female model.png'], description: '', fullDescription: '', sizes: ['Small', 'Medium', 'Large', 'XL', 'Kids Small', 'Kids Large', 'Kids XL'] }
+                { id: '27', name: 'Gravity Gives T-Shirt', price: 15.00, images: ['https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/Gravity Gives T-Shirt female model.png'], description: '', fullDescription: '', sizes: ['Small', 'Medium', 'Large', 'XL', 'Kids Small', 'Kids Large', 'Kids XL'] },
+
+                // --- NEW PLACEHOLDER ITEMS ---
+                { id: '28', name: 'Gravity Spiral Journal (Midnight Blue)', price: null, comingSoon: true, images: [placeholderGraphics.journalFront, placeholderGraphics.journalInsert], description: 'Midnight blue wire-bound journal', fullDescription: '5.25" x 7.125" midnight blue front and back covers with a custom die-cut window revealing the full-color Gravity Payments first-page insert, white wire binding, and 100 lined filler sheets.' },
+                { id: '29', name: 'Gravity Payments Hoodie (Black)', price: null, comingSoon: true, images: [placeholderGraphics.hoodie], description: 'Black pullover hoodie', fullDescription: 'Black hooded sweatshirt featuring a 3-inch Gravity icon on the front left chest and a 7-inch vertical Gravity Payments logo down the right sleeve.' },
+                { id: '30', name: 'Gravity Payments Long Sleeve (Navy)', price: null, comingSoon: true, images: [placeholderGraphics.longSleeveFront, placeholderGraphics.longSleeveBack], description: 'Navy crew-neck long sleeve', fullDescription: 'Navy long-sleeve tee with a 3-color repeated Gravity Payments screen print across the chest and the 2-tone Gravity icon printed on the upper back.' },
+                { id: '31', name: 'Gravity Sharpie Gel Pen', price: null, comingSoon: true, isAddon: true, images: [placeholderGraphics.gelPen], description: 'Navy Sharpie S-Gel pen', fullDescription: 'Contoured grip Sharpie gel pen in navy featuring a vertical white Gravity Payments barrel imprint.' },
+                { id: '32', name: 'Gravity Payments Sticker Sheet', price: null, comingSoon: true, isAddon: true, images: [placeholderGraphics.stickerSheet], description: '6" x 4" multi-sticker sheet', fullDescription: '6" x 4" sticker sheet featuring 8 die-cut Gravity Payments logos and culture slogans including "Real People. Real Support.", "Build. Connect. Grow.", and "People Over Profit".' }
             ];
 
-            const addonIds = ['5', '7', '9', '10', '21', '25'];
+            const addonIds = ['5', '7', '9', '10', '21', '25', '31', '32'];
             let cart = {}; 
             let discountValue = 0;
             const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSc5jB0nhVWjpjHoViUiEJqX7BBheodhDNge6Pzb12yhTrnG3Q/formResponse';
@@ -226,9 +321,22 @@
                         `<img src="${img}" class="slider-img ${i === 0 ? 'active' : ''}">`
                     ).join('');
 
+                    const priceDisplay = item.comingSoon
+                        ? `<span class="font-semibold text-gray-400 text-sm">Price TBD</span>`
+                        : `<span class="font-bold gravity-green-text">$${item.price.toFixed(2)}</span>`;
+
+                    const actionControls = item.comingSoon
+                        ? `<span class="bg-gray-100 text-gray-500 text-xs font-semibold px-2.5 py-1 rounded border border-gray-200">Coming Soon</span>`
+                        : `<div class="flex items-center gap-2">
+                               <button data-id="${item.id}" class="rem-btn bg-gray-200 px-2 rounded">-</button>
+                               <span id="qty-${item.id}" class="w-4 text-center font-bold">0</span>
+                               <button data-id="${item.id}" class="add-btn gravity-blue text-white px-2 rounded">+</button>
+                           </div>`;
+
                     card.innerHTML = `
                         <div class="image-slider">
                             ${item.isAddon ? `<div class="absolute top-2 left-2 z-20 bg-orange-500 text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm">ADD-ON ONLY</div>` : ''}
+                            ${item.comingSoon ? `<div class="absolute top-2 right-2 z-20 bg-blue-600 text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm">NEW / TBD</div>` : ''}
                             ${imagesHTML}
                             ${item.images.length > 1 ? `
                                 <div class="nav-arrow arrow-left" onclick="changeImg('${item.id}', -1)">&#10094;</div>
@@ -247,12 +355,8 @@
                                     ${item.sizes.map(s => `<option value="${s}">${s}</option>`).join('')}
                                 </select>` : ''}
                                 <div class="flex justify-between items-center">
-                                    <span class="font-bold gravity-green-text">$${item.price.toFixed(2)}</span>
-                                    <div class="flex items-center gap-2">
-                                        <button data-id="${item.id}" class="rem-btn bg-gray-200 px-2 rounded">-</button>
-                                        <span id="qty-${item.id}" class="w-4 text-center font-bold">0</span>
-                                        <button data-id="${item.id}" class="add-btn gravity-blue text-white px-2 rounded">+</button>
-                                    </div>
+                                    ${priceDisplay}
+                                    ${actionControls}
                                 </div>
                             </div>
                         </div>`;

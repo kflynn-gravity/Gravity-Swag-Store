@@ -250,12 +250,57 @@
                 { id: '26', name: 'Gravity Gives Tank top', price: 15.00, images: ['https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/Gravity Gives tank top male model.jpg'], description: '', fullDescription: '', sizes: ['XS', 'Small', 'Medium', 'Large', 'XL'] },
                 { id: '27', name: 'Gravity Gives T-Shirt', price: 15.00, images: ['https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/Gravity Gives T-Shirt female model.png'], description: '', fullDescription: '', sizes: ['Small', 'Medium', 'Large', 'XL', 'Kids Small', 'Kids Large', 'Kids XL'] },
 
-                // --- NEW ITEMS (Upload your photos to GitHub images/ folder and swap URLs below) ---
-                { id: '28', name: 'Gravity Spiral Journal (Midnight Blue)', price: null, comingSoon: true, images: ['https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/spiral-journal-front.jpg'], description: 'Midnight blue wire-bound journal', fullDescription: '5.25" x 7.125" midnight blue front and back covers with a custom die-cut window revealing the full-color Gravity Payments first-page insert, white wire binding, and 100 lined filler sheets.' },
-                { id: '29', name: 'Gravity Payments Hoodie (Black)', price: null, comingSoon: true, images: [makePlaceholderImg('Gravity Hoodie (Black)', 'Photo coming soon • Chest icon + sleeve logo')], description: 'Black pullover hoodie', fullDescription: 'Black hooded sweatshirt featuring a 3-inch Gravity icon on the front left chest and a 7-inch vertical Gravity Payments logo down the right sleeve.' },
-                { id: '30', name: 'Gravity Payments Long Sleeve (Navy)', price: null, comingSoon: true, images: [makePlaceholderImg('Gravity Long Sleeve (Navy)', 'Photo coming soon • Repeated chest print + back icon')], description: 'Navy crew-neck long sleeve', fullDescription: 'Navy long-sleeve tee with a 3-color repeated Gravity Payments screen print across the chest and the 2-tone Gravity icon printed on the upper back.' },
-                { id: '31', name: 'Gravity Sharpie Gel Pen', price: null, comingSoon: true, isAddon: true, images: [makePlaceholderImg('Gravity Sharpie Gel Pen', 'Photo coming soon • Navy barrel w/ white logo')], description: 'Navy Sharpie S-Gel pen', fullDescription: 'Contoured grip Sharpie gel pen in navy featuring a vertical white Gravity Payments barrel imprint.' },
-                { id: '32', name: 'Gravity Payments Sticker Sheet', price: null, comingSoon: true, isAddon: true, images: [makePlaceholderImg('Gravity Sticker Sheet (6" x 4")', 'Photo coming soon • 8 die-cut company stickers')], description: '6" x 4" multi-sticker sheet', fullDescription: '6" x 4" sticker sheet featuring 8 die-cut Gravity Payments logos and culture slogans including "Real People. Real Support.", "Build. Connect. Grow.", and "People Over Profit".' }
+                // --- NEW ITEMS (Pre-wired to your images/ folder filenames) ---
+{
+    id: '28',
+    name: 'Gravity Spiral Journal (Midnight Blue)',
+    price: null,
+    comingSoon: true,
+    images: ['https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/spiral-journal-front.png'],
+    description: 'Midnight blue wire-bound journal',
+    fullDescription: '5.25" x 7.125" midnight blue front and back covers with a custom die-cut window revealing the full-color Gravity Payments first-page insert, white wire binding, and 100 lined filler sheets.'
+},
+{
+    id: '29',
+    name: 'Gravity Payments Hoodie (Black)',
+    price: null,
+    comingSoon: true,
+    images: ['https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/black-hoodie-front.png'],
+    description: 'Black pullover hoodie',
+    fullDescription: 'Black hooded sweatshirt featuring a 3-inch Gravity icon on the front left chest and a 7-inch vertical Gravity Payments logo down the right sleeve.'
+},
+{
+    id: '30',
+    name: 'Gravity Payments Long Sleeve (Navy)',
+    price: null,
+    comingSoon: true,
+    images: [
+        'https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/navy-longsleeve-front.png',
+        'https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/navy-longsleeve-back.png'
+    ],
+    description: 'Navy crew-neck long sleeve',
+    fullDescription: 'Navy long-sleeve tee with a 3-color repeated Gravity Payments screen print across the chest and the 2-tone Gravity icon printed on the upper back.'
+},
+{
+    id: '31',
+    name: 'Gravity Sharpie Gel Pen',
+    price: null,
+    comingSoon: true,
+    isAddon: true,
+    images: ['https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/sharpie-pen-front.png'],
+    description: 'Navy Sharpie S-Gel pen',
+    fullDescription: 'Contoured grip Sharpie gel pen in navy featuring a vertical white Gravity Payments barrel imprint.'
+},
+{
+    id: '32',
+    name: 'Gravity Payments Sticker Sheet',
+    price: null,
+    comingSoon: true,
+    isAddon: true,
+    images: ['https://raw.githubusercontent.com/kflynn-gravity/Gravity-Swag-Store/main/images/sticker-sheet-front.png'],
+    description: '6" x 4" multi-sticker sheet',
+    fullDescription: '6" x 4" sticker sheet featuring 8 die-cut Gravity Payments logos and culture slogans including "Real People. Real Support.", "Build. Connect. Grow.", and "People Over Profit".'
+}
             ];
 
             const addonIds = ['5', '7', '9', '10', '21', '25', '31', '32'];
